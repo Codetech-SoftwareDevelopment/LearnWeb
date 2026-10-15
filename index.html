@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="موقع شرح HTML وCSS باللغة العربية بالكامل - تعلم البرمجة مع أمثلة تفاعلية عملية">
+  <meta name="keywords" content="HTML, CSS, تعلم, برمجة, ويب, شرح, عربي">
+  <meta name="author" content="المهندس مصطفى جمال قابيل">
+  <meta property="og:title" content="CodeTech - مرجع HTML وCSS">
+  <meta property="og:description" content="مرجع شامل لتعلم HTML وCSS باللغة العربية">
+  <title>CodeTech - مرجع HTML وCSS | المهندس مصطفى جمال قابيل</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+  <script>
+    // تفعيل وضع الدارك فقط إذا كان المستخدم قد اختاره بنفسه، وإلا فالافتراضي هو اللايت مود
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header">
+  <!-- Mobile Menu Button -->
+  <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" id="menuBtn">
+    ☰
+  </button>
+
+  <!-- Logo -->
+  <a href="#" class="logo">
+    <div class="logo-icon">🌐</div>
+    <span class="logo-text">Code<span>Tech</span></span>
+  </a>
+
+  <!-- Nav Tabs (Desktop) -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-cat="html" onclick="switchCategory('html')">
+      🌐 HTML
+    </button>
+    <button class="nav-tab" data-cat="css" onclick="switchCategory('css')">
+      🎨 CSS
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrapper">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="ابحث عن تاج، خاصية، موضوع..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </div>
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="header-actions">
+    <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="التبديل إلى الوضع الليلي" aria-label="التبديل إلى الوضع الليلي">
+      🌙
+    </button>
+  </div>
+</header>
+
+<!-- ==================== OVERLAY (Mobile) ==================== -->
+<div id="overlay"></div>
+
+<!-- ==================== LAYOUT ==================== -->
+<div class="layout">
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Mobile Nav Tabs inside Sidebar -->
+    <div class="sidebar-nav-tabs">
+      <button class="nav-tab active" data-cat="html" onclick="switchCategory('html')">
+        🌐 HTML
+      </button>
+      <button class="nav-tab" data-cat="css" onclick="switchCategory('css')">
+        🎨 CSS
+      </button>
+    </div>
+
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <span id="categoryIcon">🌐</span>
+      <span id="categoryTitle">HTML</span>
+      <span class="topics-count" id="topicsCount">موضوع</span>
+    </div>
+
+    <!-- Topics List -->
+    <ul id="topicsList"></ul>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span class="breadcrumb-icon">📍</span>
+      <span id="breadcrumb">HTML > اختر موضوعاً</span>
+    </div>
+
+    <!-- Dynamic Content -->
+    <div id="mainContent">
+      <!-- Content rendered by JS -->
+    </div>
+  </main>
+
+</div><!-- end .layout -->
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer" id="siteFooter">
+  <div class="footer-glow"></div>
+  <div class="footer-wrapper">
+    <div class="footer-grid">
+      
+      <!-- Brand & Project Info -->
+      <div class="footer-box footer-brand-box">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">🌐</div>
+          <div class="footer-logo-info">
+            <span class="footer-logo-title">Code<span>Tech</span></span>
+            <span class="footer-logo-sub">مرجع الويب العربي الشامل</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          منصة تعليمية متكاملة لشرح تقنيات الويب الحديثة HTML5 و CSS3 باللغة العربية مع محررات أكواد تفاعلية وأمثلة تطبيقية حية خطوة بخطوة.
+        </p>
+        <div class="footer-badges">
+          <span class="footer-badge">💻 HTML5 & CSS3</span>
+          <span class="footer-badge">⚡ تفاعلي ومباشر</span>
+          <span class="footer-badge">📱 متجاوب 100%</span>
+        </div>
+      </div>
+
+      <!-- Designer & Developer Credit + Contact -->
+      <div class="footer-box footer-developer-box">
+        <div class="dev-card">
+          <div class="dev-header">
+            <span class="dev-avatar">👨‍💻</span>
+            <div class="dev-header-text">
+              <span class="dev-role-label">فخر الصناعة والتطوير</span>
+              <h3 class="dev-title">الموقع اتصمم و اتبرمج بواسطة</h3>
+            </div>
+          </div>
+          <div class="dev-name-banner">
+            <span class="sparkle">✨</span>
+            <h2 class="engineer-name">المهندس مصطفى جمال قابيل</h2>
+            <span class="sparkle">✨</span>
+          </div>
+          
+          <div class="contact-section">
+            <span class="contact-title">للتواصل المباشر والاستفسارات:</span>
+            <div class="contact-buttons-group">
+              <a href="tel:01090832443" class="contact-card-btn phone-action" title="اتصال هاتفي مباشر">
+                <span class="btn-icon">📞</span>
+                <div class="btn-info">
+                  <span class="btn-label">اتصال هاتفي</span>
+                  <span class="btn-value" dir="ltr">01090832443</span>
+                </div>
+              </a>
+              <a href="https://wa.me/201090832443" target="_blank" rel="noopener noreferrer" class="contact-card-btn whatsapp-action" title="تواصل فوري عبر واتساب">
+                <span class="btn-icon">💬</span>
+                <div class="btn-info">
+                  <span class="btn-label">محادثة واتساب</span>
+                  <span class="btn-value" dir="ltr">01090832443</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spiritual Reminder & Dua -->
+      <div class="footer-box footer-dua-box">
+        <div class="dua-container">
+          <div class="dua-icon-header">
+            <span class="prophet-icon">🕌</span>
+            <span class="heart-pulse">🤍</span>
+          </div>
+          <div class="dua-content">
+            <h4 class="dua-main-phrase">ماتنساش تصلي على النبي ﷺ</h4>
+            <p class="dua-sub-phrase">و تدعيلي لو بفيدك بحاجه 🤲</p>
+          </div>
+          <div class="dua-divider"></div>
+          <p class="dua-hadith">
+            «مَنْ صَلَّى عَلَيَّ صَلَاةً صَلَّى اللَّهُ عَلَيْهِ بِهَا عَشْرًا»
+          </p>
+          <div class="dua-pill">
+            <span>دعوة في ظهر الغيب تصنع فارقاً 🌸</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Copyright Bottom Strip -->
+  <div class="footer-bottom-strip">
+    <div class="footer-bottom-inner">
+      <p class="copyright-text">
+        جميع الحقوق محفوظة © <span id="currentYear">2025</span> | تصميم وبرمجة <strong>المهندس مصطفى جمال قابيل</strong>
+      </p>
+      <div class="footer-quick-links">
+        <button class="footer-scroll-top-btn" onclick="scrollToTop()" title="الرجوع للأعلى">
+          <span>الرجوع للأعلى</span>
+          <span class="icon">↑</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== SCROLL TO TOP ==================== -->
+<button id="scrollTop" onclick="scrollToTop()" title="العودة للأعلى" aria-label="العودة للأعلى">
+  ↑
+</button>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="js/data/html-data.js"></script>
+<script src="js/data/css-data.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Update topics count after load -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    function updateCount() {
+      const data = currentCategory === 'html' ? HTML_DATA : CSS_DATA;
+      document.getElementById('topicsCount').textContent = `${data.topics.length} موضوع`;
+    }
+    updateCount();
+    // Patch switchCategory to also update count
+    const origSwitch = switchCategory;
+    window.switchCategory = function(cat) {
+      origSwitch(cat);
+      updateCount();
+    };
+  });
+</script>
+
+</body>
+</html>
