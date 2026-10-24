@@ -32,7 +32,7 @@ function applyTheme() {
   document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
   const btn = document.getElementById('themeToggle');
   if (btn) {
-    btn.textContent = isDarkMode ? '☀️' : '🌙';
+    btn.innerHTML = isDarkMode ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     btn.title = isDarkMode ? 'التبديل إلى الوضع النهاري (Light)' : 'التبديل إلى الوضع الليلي (Dark)';
     btn.setAttribute('aria-label', isDarkMode ? 'التبديل إلى الوضع النهاري' : 'التبديل إلى الوضع الليلي');
   }
@@ -47,15 +47,29 @@ function initFooter() {
 }
 
 // ==================== Sidebar ====================
+// ==================== Sidebar ====================
+function getCategoryIconHtml(category) {
+  switch (category) {
+    case 'html': return '<i class="fa-brands fa-html5"></i>';
+    case 'css': return '<i class="fa-brands fa-css3-alt"></i>';
+    case 'js': return '<i class="fa-brands fa-js"></i>';
+    case 'dart': return '<i class="fa-solid fa-bullseye"></i>';
+    default: return '<i class="fa-solid fa-code"></i>';
+  }
+}
+
 function renderSidebar(category) {
   currentCategory = category;
-  const data = category === 'html' ? HTML_DATA : CSS_DATA;
+  let data = HTML_DATA;
+  if (category === 'css') data = CSS_DATA;
+  else if (category === 'js') data = JS_DATA;
+  else if (category === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
   const list = document.getElementById('topicsList');
   const catTitle = document.getElementById('categoryTitle');
   const catIcon = document.getElementById('categoryIcon');
 
-  catTitle.textContent = data.category;
-  catIcon.textContent = data.icon;
+  if (catTitle) catTitle.textContent = data.category;
+  if (catIcon) catIcon.innerHTML = getCategoryIconHtml(category);
 
   list.innerHTML = '';
   data.topics.forEach(topic => {
@@ -81,7 +95,10 @@ function renderSidebar(category) {
 
 function switchCategory(cat) {
   renderSidebar(cat);
-  const data = cat === 'html' ? HTML_DATA : CSS_DATA;
+  let data = HTML_DATA;
+  if (cat === 'css') data = CSS_DATA;
+  else if (cat === 'js') data = JS_DATA;
+  else if (cat === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
   loadTopic(data.topics[0]);
 }
 
@@ -115,69 +132,387 @@ function loadTopic(topic) {
   window.scrollTo(0, 0);
 
   // Update breadcrumb
-  document.getElementById('breadcrumb').textContent =
-    `${currentCategory.toUpperCase()} > ${topic.title}`;
+  const breadcrumbEl = document.getElementById('breadcrumb');
+  if (breadcrumbEl) {
+    breadcrumbEl.textContent = `${currentCategory.toUpperCase()} > ${topic.title}`;
+  }
 
   // Highlight code
   highlightCode();
 }
 
+// Extract pure code for specific language
+function getTopicCode(topic, category) {
+  if (topic.example && topic.example.code) {
+    return topic.example.code;
+  }
+  const html = topic.example ? (topic.example.html || '') : '';
+  if (category === 'css') {
+    const m = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+    return m ? m[1].trim() : html;
+  }
+  if (category === 'js') {
+    const m = html.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
+    return m ? m[1].trim() : html;
+  }
+  if (category === 'html') {
+    return html;
+  }
+  if (category === 'dart') {
+    return topic.example && topic.example.code ? topic.example.code : '// كود Dart';
+  }
+  return html;
+}
+
+// Render Example Section
 function renderExampleSection(topic) {
+  const isDart = currentCategory === 'dart';
+  const isJS = currentCategory === 'js';
+  const isCSS = currentCategory === 'css';
+
+  if (isDart) {
+    const dartCode = getTopicCode(topic, 'dart');
+    const dartOutput = topic.example.output || '// لا توجد مخرجات مسجلة';
+    
+    return `
+      <div class="example-section" id="exSec-${topic.id}">
+        <div class="example-header cat-dart">
+          <div class="example-header-title">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>بيئة تشغيل Dart التفاعلية (DartPad & Terminal)</span>
+            <span class="lang-badge"><i class="fa-solid fa-bullseye"></i> Dart 3.x</span>
+          </div>
+          <div class="example-tabs">
+            <button class="ex-tab active" id="tabBtnCode-${topic.id}" onclick="showDartTab('code', this, '${topic.id}')">
+              <i class="fa-solid fa-code"></i> كود Dart
+            </button>
+            <button class="ex-tab" id="tabBtnTerm-${topic.id}" onclick="showDartTab('terminal', this, '${topic.id}')">
+              <i class="fa-solid fa-terminal"></i> مخرجات الكونسول
+            </button>
+            <button class="ex-tab split-toggle" id="splitBtn-${topic.id}" onclick="toggleSplitView('${topic.id}', this)" title="عرض الكود والمخرجات معاً جنباً إلى جنب">
+              <i class="fa-solid fa-table-columns"></i> عرض متجاور
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabbed Container -->
+        <div class="tabbed-view-container" id="tabbedView-${topic.id}">
+          <!-- Code Tab -->
+          <div class="tab-content active" id="tab-code-${topic.id}">
+            <div class="code-toolbar">
+              <div class="code-toolbar-start">
+                <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> bin/main.dart</span>
+              </div>
+              <div class="code-toolbar-actions">
+                <button onclick="runDartSimulation('${topic.id}', true)" class="run-action-btn" title="تشغيل الكود والانتقال للكونسول">
+                  <i class="fa-solid fa-play"></i> تشغيل وشاهد الخرج
+                </button>
+                <button onclick="copyCode('${topic.id}')" class="copy-btn" id="copyBtn-${topic.id}">
+                  <i class="fa-regular fa-copy"></i> نسخ كود Dart
+                </button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="lang-dart" id="code-${topic.id}">${escapeHtmlCode(dartCode)}</code></pre>
+          </div>
+
+          <!-- Terminal Tab -->
+          <div class="tab-content" id="tab-terminal-${topic.id}">
+            ${renderDartTerminalHtml(topic, dartOutput)}
+          </div>
+        </div>
+
+        <!-- Split View Container (Initially Hidden) -->
+        <div class="split-view-container" id="splitView-${topic.id}" style="display: none;">
+          <div class="split-view-col">
+            <div class="code-toolbar">
+              <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> bin/main.dart</span>
+              <button onclick="copyCode('${topic.id}')" class="copy-btn">
+                <i class="fa-regular fa-copy"></i> نسخ
+              </button>
+            </div>
+            <pre class="code-block"><code class="lang-dart">${escapeHtmlCode(dartCode)}</code></pre>
+          </div>
+          <div class="split-view-col">
+            ${renderDartTerminalHtml(topic, dartOutput, true)}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // HTML / CSS / JS Examples
+  let catClass = 'cat-html';
+  let langLabel = 'HTML5 Structure';
+  let langClass = 'lang-html';
+  let langIcon = '<i class="fa-brands fa-html5"></i>';
+
+  if (isJS) {
+    catClass = 'cat-js';
+    langLabel = 'JavaScript Code';
+    langClass = 'lang-js';
+    langIcon = '<i class="fa-brands fa-js"></i>';
+  } else if (isCSS) {
+    catClass = 'cat-css';
+    langLabel = 'CSS3 Stylesheet';
+    langClass = 'lang-css';
+    langIcon = '<i class="fa-brands fa-css3-alt"></i>';
+  }
+
+  const pureCode = getTopicCode(topic, currentCategory);
+
   return `
     <div class="example-section">
-      <div class="example-header">
-        <span>🔥 مثال تفاعلي</span>
+      <div class="example-header ${catClass}">
+        <div class="example-header-title">
+          ${langIcon}
+          <span>مثال تطبيقي ومعاينة تفاعلية</span>
+          <span class="lang-badge">${currentCategory.toUpperCase()}</span>
+        </div>
         <div class="example-tabs">
-          <button class="ex-tab active" onclick="showTab('preview', this)">👁️ معاينة</button>
-          <button class="ex-tab" onclick="showTab('code', this)">💻 الكود</button>
+          <button class="ex-tab active" onclick="showWebTab('preview', this, '${topic.id}')">
+            <i class="fa-regular fa-eye"></i> المعاينة التفاعلية
+          </button>
+          <button class="ex-tab" onclick="showWebTab('code', this, '${topic.id}')">
+            <i class="fa-solid fa-code"></i> كود ${currentCategory.toUpperCase()}
+          </button>
         </div>
       </div>
-      <div class="tab-content active" id="tab-preview">
-        <iframe id="previewFrame" srcdoc="${escapeHtml(topic.example.html)}" sandbox="allow-scripts"></iframe>
+      <div class="tab-content active" id="tab-preview-${topic.id}">
+        <iframe id="previewFrame" srcdoc="${escapeHtml(topic.example.html || '')}" sandbox="allow-scripts allow-modals"></iframe>
       </div>
-      <div class="tab-content" id="tab-code">
+      <div class="tab-content" id="tab-code-${topic.id}">
         <div class="code-toolbar">
-          <span>HTML</span>
-          <button onclick="copyCode('${topic.id}')" class="copy-btn" id="copyBtn-${topic.id}">📋 نسخ</button>
+          <div class="code-toolbar-start">
+            <span class="code-toolbar-lang">${langIcon} ${langLabel}</span>
+          </div>
+          <div class="code-toolbar-actions">
+            <button onclick="copyCode('${topic.id}')" class="copy-btn" id="copyBtn-${topic.id}">
+              <i class="fa-regular fa-copy"></i> نسخ الكود
+            </button>
+          </div>
         </div>
-        <pre class="code-block"><code id="code-${topic.id}">${escapeHtmlCode(topic.example.html)}</code></pre>
+        <pre class="code-block"><code class="${langClass}" id="code-${topic.id}">${escapeHtmlCode(pureCode)}</code></pre>
       </div>
     </div>
   `;
 }
 
-function showTab(tabName, btn) {
-  const preview = document.getElementById('tab-preview');
-  const code = document.getElementById('tab-code');
-  document.querySelectorAll('.ex-tab').forEach(t => t.classList.remove('active'));
+// Generate Dart Terminal HTML
+function renderDartTerminalHtml(topic, outputText, isSplit = false) {
+  const termId = isSplit ? `termOut-split-${topic.id}` : `termOut-${topic.id}`;
+  const statusId = isSplit ? `termStatus-split-${topic.id}` : `termStatus-${topic.id}`;
+  
+  return `
+    <div class="dart-terminal-card">
+      <div class="dart-terminal-header">
+        <div class="terminal-controls">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+        </div>
+        <div class="terminal-title">
+          <i class="fa-solid fa-terminal"></i>
+          <span>dart-vm@codetech: ~/projects/dart_app</span>
+          <span class="terminal-sdk-badge"><i class="fa-solid fa-bullseye"></i> Dart SDK 3.4.0 (AOT/JIT)</span>
+        </div>
+        <div class="terminal-actions">
+          <button class="term-btn btn-run-primary" onclick="runDartSimulation('${topic.id}', false)">
+            <i class="fa-solid fa-play"></i> تشغيل
+          </button>
+          <button class="term-btn" onclick="copyTerminalOutput('${topic.id}')">
+            <i class="fa-regular fa-copy"></i> نسخ الخرج
+          </button>
+          <button class="term-btn" onclick="clearTerminal('${topic.id}')">
+            <i class="fa-solid fa-trash-can"></i> مسح
+          </button>
+        </div>
+      </div>
+      <div class="dart-terminal-body">
+        <div class="terminal-command-line">
+          <span class="terminal-prompt-symbol">$</span>
+          <span>dart run bin/main.dart</span>
+        </div>
+        <div class="terminal-output-content" id="${termId}">${escapeHtml(outputText)}</div>
+        <div class="terminal-status-bar" id="${statusId}">
+          <span class="terminal-exit-code"><i class="fa-solid fa-circle-check"></i> Process finished with exit code 0</span>
+          <span>Dart VM execution completed</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Tab switcher for Dart
+function showDartTab(tabName, btn, topicId) {
+  const codeTab = document.getElementById(`tab-code-${topicId}`);
+  const termTab = document.getElementById(`tab-terminal-${topicId}`);
+  const splitContainer = document.getElementById(`splitView-${topicId}`);
+  const tabbedContainer = document.getElementById(`tabbedView-${topicId}`);
+  const splitBtn = document.getElementById(`splitBtn-${topicId}`);
+
+  if (splitContainer) splitContainer.style.display = 'none';
+  if (tabbedContainer) tabbedContainer.style.display = 'block';
+  if (splitBtn) splitBtn.classList.remove('active');
+
+  const tabsGroup = btn.closest('.example-tabs');
+  if (tabsGroup) {
+    tabsGroup.querySelectorAll('.ex-tab').forEach(t => t.classList.remove('active'));
+  }
   btn.classList.add('active');
-  if (tabName === 'preview') {
-    preview.classList.add('active');
-    code.classList.remove('active');
+
+  if (tabName === 'code') {
+    if (codeTab) codeTab.classList.add('active');
+    if (termTab) termTab.classList.remove('active');
   } else {
-    code.classList.add('active');
-    preview.classList.remove('active');
+    if (termTab) termTab.classList.add('active');
+    if (codeTab) codeTab.classList.remove('active');
   }
 }
 
+// Toggle Split View for Dart
+function toggleSplitView(topicId, btn) {
+  const tabbedContainer = document.getElementById(`tabbedView-${topicId}`);
+  const splitContainer = document.getElementById(`splitView-${topicId}`);
+  if (!tabbedContainer || !splitContainer) return;
+
+  const isCurrentlySplit = splitContainer.style.display === 'grid' || splitContainer.style.display === 'block';
+
+  if (isCurrentlySplit) {
+    // Switch back to tabbed view
+    splitContainer.style.display = 'none';
+    tabbedContainer.style.display = 'block';
+    btn.classList.remove('active');
+    const codeBtn = document.getElementById(`tabBtnCode-${topicId}`);
+    if (codeBtn) codeBtn.classList.add('active');
+  } else {
+    // Switch to split view
+    tabbedContainer.style.display = 'none';
+    splitContainer.style.display = 'grid';
+    const tabsGroup = btn.closest('.example-tabs');
+    if (tabsGroup) {
+      tabsGroup.querySelectorAll('.ex-tab').forEach(t => t.classList.remove('active'));
+    }
+    btn.classList.add('active');
+  }
+}
+
+// Tab switcher for Web (HTML/CSS/JS)
+function showWebTab(tabName, btn, topicId) {
+  const preview = document.getElementById(`tab-preview-${topicId}`);
+  const code = document.getElementById(`tab-code-${topicId}`);
+  const tabsGroup = btn.closest('.example-tabs');
+  if (tabsGroup) {
+    tabsGroup.querySelectorAll('.ex-tab').forEach(t => t.classList.remove('active'));
+  }
+  btn.classList.add('active');
+  if (tabName === 'preview') {
+    if (preview) preview.classList.add('active');
+    if (code) code.classList.remove('active');
+  } else {
+    if (code) code.classList.add('active');
+    if (preview) preview.classList.remove('active');
+  }
+}
+
+// Run Dart Simulation with compiling animation
+function runDartSimulation(topicId, switchToTab = false) {
+  const topic = currentTopic && currentTopic.id === topicId ? currentTopic : 
+    (typeof DART_DATA !== 'undefined' ? DART_DATA.topics.find(t => t.id === topicId) : null);
+  if (!topic || !topic.example) return;
+
+  if (switchToTab) {
+    const termBtn = document.getElementById(`tabBtnTerm-${topicId}`);
+    if (termBtn) {
+      showDartTab('terminal', termBtn, topicId);
+    }
+  }
+
+  const outEls = [
+    document.getElementById(`termOut-${topicId}`),
+    document.getElementById(`termOut-split-${topicId}`)
+  ].filter(Boolean);
+
+  const statusEls = [
+    document.getElementById(`termStatus-${topicId}`),
+    document.getElementById(`termStatus-split-${topicId}`)
+  ].filter(Boolean);
+
+  outEls.forEach(el => {
+    el.innerHTML = '<span style="color:#a855f7;"><i class="fa-solid fa-spinner fa-spin"></i> [Dart VM Compiling & Initializing Runtime...]</span>';
+  });
+
+  statusEls.forEach(el => {
+    el.innerHTML = '<span class="terminal-running-spinner"><i class="fa-solid fa-gear fa-spin"></i> جاري التنفيذ...</span>';
+  });
+
+  setTimeout(() => {
+    const rawOutput = topic.example.output || '// Finished without output';
+    outEls.forEach(el => {
+      el.textContent = rawOutput;
+    });
+    statusEls.forEach(el => {
+      el.innerHTML = `
+        <span class="terminal-exit-code"><i class="fa-solid fa-circle-check"></i> Process finished with exit code 0</span>
+        <span style="color:#10b981;">Execution time: ~${Math.floor(Math.random() * 25) + 30}ms</span>
+      `;
+    });
+  }, 350);
+}
+
+// Copy Terminal Output
+function copyTerminalOutput(topicId) {
+  const termOut = document.getElementById(`termOut-${topicId}`) || document.getElementById(`termOut-split-${topicId}`);
+  if (!termOut) return;
+  navigator.clipboard.writeText(termOut.textContent).then(() => {
+    const btn = event.target.closest('button');
+    if (btn) {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ!';
+      btn.style.color = '#10b981';
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+        btn.style.color = '';
+      }, 1800);
+    }
+  });
+}
+
+// Clear Terminal Output
+function clearTerminal(topicId) {
+  const outEls = [
+    document.getElementById(`termOut-${topicId}`),
+    document.getElementById(`termOut-split-${topicId}`)
+  ].filter(Boolean);
+
+  outEls.forEach(el => {
+    el.innerHTML = '<span style="color:#64748b;">// تيرمينال فارغ - اضغط على "تشغيل" لتشغيل الكود مرة أخرى</span>';
+  });
+}
+
+// Copy Code
 function copyCode(topicId) {
   const codeEl = document.getElementById(`code-${topicId}`);
   const btn = document.getElementById(`copyBtn-${topicId}`);
   if (!codeEl) return;
   const text = codeEl.textContent;
   navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = '✅ تم النسخ!';
-    btn.style.background = 'var(--success)';
-    setTimeout(() => {
-      btn.textContent = '📋 نسخ';
-      btn.style.background = '';
-    }, 2000);
+    if (btn) {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ!';
+      btn.style.background = 'var(--success)';
+      btn.style.color = '#ffffff';
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 2000);
+    }
   });
 }
 
 function highlightCode() {
-  document.querySelectorAll('.content-body pre code, .code-block').forEach(el => {
-    el.innerHTML = syntaxHighlight(el.innerHTML, el.className);
+  document.querySelectorAll('.content-body pre code, .code-block code').forEach(el => {
+    el.innerHTML = syntaxHighlight(el.textContent, el.className);
   });
 }
 
@@ -185,6 +520,7 @@ function highlightCode() {
 function initSearch() {
   const input = document.getElementById('searchInput');
   const results = document.getElementById('searchResults');
+  if (!input || !results) return;
 
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
@@ -192,7 +528,12 @@ function initSearch() {
       results.classList.remove('active');
       return;
     }
-    const allTopics = [...HTML_DATA.topics, ...CSS_DATA.topics];
+    const allTopics = [
+      ...HTML_DATA.topics,
+      ...CSS_DATA.topics,
+      ...(typeof JS_DATA !== 'undefined' ? JS_DATA.topics : []),
+      ...(typeof DART_DATA !== 'undefined' ? DART_DATA.topics : [])
+    ];
     const matches = allTopics.filter(t =>
       t.title.toLowerCase().includes(q) ||
       (t.tags && t.tags.some(tag => tag.toLowerCase().includes(q))) ||
@@ -213,17 +554,36 @@ function initSearch() {
       input.value = '';
     }
   });
+
+  // Global shortcut: Ctrl+K or /
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
 }
 
 function renderSearchResults(matches, container, query) {
   if (matches.length === 0) {
-    container.innerHTML = `<div class="no-results">🔍 لا توجد نتائج لـ "${query}"</div>`;
+    container.innerHTML = `<div class="no-results"><i class="fa-solid fa-magnifying-glass"></i> لا توجد نتائج مطابقة لـ "${query}"</div>`;
     container.classList.add('active');
     return;
   }
   container.innerHTML = matches.map(topic => {
-    const cat = HTML_DATA.topics.includes(topic) ? 'HTML' : 'CSS';
-    const catColor = cat === 'HTML' ? 'var(--primary)' : 'var(--accent)';
+    let cat = 'JS';
+    let catColor = '#f59e0b';
+    if (HTML_DATA.topics.includes(topic)) {
+      cat = 'HTML';
+      catColor = 'var(--primary)';
+    } else if (CSS_DATA.topics.includes(topic)) {
+      cat = 'CSS';
+      catColor = 'var(--accent)';
+    } else if (typeof DART_DATA !== 'undefined' && DART_DATA.topics.includes(topic)) {
+      cat = 'Dart';
+      catColor = '#0081cb';
+    }
     const hl = (text) => text.replace(new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
       m => `<mark>${m}</mark>`);
     return `
@@ -233,7 +593,9 @@ function renderSearchResults(matches, container, query) {
           <div class="res-title">${hl(topic.title)}</div>
           <div class="res-desc">${hl(topic.description)}</div>
         </div>
-        <span class="res-cat" style="color:${catColor}">${cat}</span>
+        <span class="res-cat" style="color:${catColor}; background:${catColor}18">
+          ${getCategoryIconHtml(cat.toLowerCase())} ${cat}
+        </span>
       </div>
     `;
   }).join('');
@@ -241,8 +603,11 @@ function renderSearchResults(matches, container, query) {
 }
 
 function selectSearchResult(topicId, cat) {
-  const category = cat === 'HTML' ? 'html' : 'css';
-  const data = category === 'html' ? HTML_DATA : CSS_DATA;
+  const category = cat.toLowerCase();
+  let data = HTML_DATA;
+  if (category === 'css') data = CSS_DATA;
+  else if (category === 'js') data = JS_DATA;
+  else if (category === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
   const topic = data.topics.find(t => t.id === topicId);
   if (!topic) return;
 
@@ -292,33 +657,161 @@ function escapeHtmlCode(str) {
     .replace(/>/g, '&gt;');
 }
 
-// Simple syntax highlighter
+// ==================== Syntax Highlighters (Single-Pass Tokenizers) ====================
+function highlightDart(code) {
+  const tokenRegex = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(@\w+)|('''[\s\S]*?'''|"""[\s\S]*?"""|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b(?:void|int|double|num|bool|String|List|Map|Set|Future|Stream|StreamController|dynamic|Object|DateTime|Duration|RegExp|Exception|Error|Paint|Colors|PaintingStyle|Never|Null|Iterable|Runes|Symbol)\b)|(\b(?:class|abstract|extends|implements|with|mixin|enum|extension|on|factory|get|set|var|final|const|late|required|return|if|else|switch|case|break|continue|default|when|try|catch|finally|throw|rethrow|assert|async|await|yield|super|this|new|is|as|in|typedef|import|export|part|show|hide|null|true|false|base|interface|sealed)\b)|(\b(?:print|identical)\b)|(\b\d+(?:\.\d+)?\b)/g;
+
+  let lastIndex = 0;
+  let out = '';
+  let match;
+
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out += escapeHtml(code.slice(lastIndex, match.index));
+    }
+    lastIndex = tokenRegex.lastIndex;
+
+    const [full, comment, annotation, str, type, kw, builtin, num] = match;
+    if (comment) {
+      out += `<span class="syn-comment">${escapeHtml(comment)}</span>`;
+    } else if (annotation) {
+      out += `<span class="syn-annotation">${escapeHtml(annotation)}</span>`;
+    } else if (str) {
+      const escapedStr = escapeHtml(str).replace(/(\$([a-zA-Z0-9_]+)|\$\{([^}]+)\})/g, '<span class="syn-interpol">$1</span>');
+      out += `<span class="syn-string">${escapedStr}</span>`;
+    } else if (type) {
+      out += `<span class="syn-type">${escapeHtml(type)}</span>`;
+    } else if (kw) {
+      out += `<span class="syn-keyword">${escapeHtml(kw)}</span>`;
+    } else if (builtin) {
+      out += `<span class="syn-builtin">${escapeHtml(builtin)}</span>`;
+    } else if (num) {
+      out += `<span class="syn-number">${escapeHtml(num)}</span>`;
+    } else {
+      out += escapeHtml(full);
+    }
+  }
+
+  if (lastIndex < code.length) {
+    out += escapeHtml(code.slice(lastIndex));
+  }
+
+  return out;
+}
+
+function highlightJS(code) {
+  const tokenRegex = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(`(?:\\.|[^`\\])*`|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b(?:const|let|var|function|return|if|else|for|while|do|switch|case|break|continue|try|catch|finally|throw|class|new|extends|super|this|async|await|import|export|default|null|undefined|true|false|typeof|instanceof|void|delete|in|of)\b)|(\b(?:console|document|window|Math|Date|Array|Object|String|Number|JSON|Promise|setTimeout|setInterval|clearInterval|clearTimeout|fetch)\b)|(\b\d+(?:\.\d+)?\b)/g;
+
+  let lastIndex = 0;
+  let out = '';
+  let match;
+
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out += escapeHtml(code.slice(lastIndex, match.index));
+    }
+    lastIndex = tokenRegex.lastIndex;
+
+    const [full, comment, str, kw, builtin, num] = match;
+    if (comment) {
+      out += `<span class="syn-comment">${escapeHtml(comment)}</span>`;
+    } else if (str) {
+      out += `<span class="syn-string">${escapeHtml(str)}</span>`;
+    } else if (kw) {
+      out += `<span class="syn-keyword">${escapeHtml(kw)}</span>`;
+    } else if (builtin) {
+      out += `<span class="syn-builtin">${escapeHtml(builtin)}</span>`;
+    } else if (num) {
+      out += `<span class="syn-number">${escapeHtml(num)}</span>`;
+    } else {
+      out += escapeHtml(full);
+    }
+  }
+
+  if (lastIndex < code.length) {
+    out += escapeHtml(code.slice(lastIndex));
+  }
+
+  return out;
+}
+
+function highlightHTML(code) {
+  const tokenRegex = /(<!--[\s\S]*?-->)|(<\/?)([a-zA-Z0-9-]+)((?:\s+[\w:-]+(?:=(?:"[^"]*"|'[^']*'|[^\s>]+))?)*\s*)(\/?>)/g;
+
+  let lastIndex = 0;
+  let out = '';
+  let match;
+
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out += escapeHtml(code.slice(lastIndex, match.index));
+    }
+    lastIndex = tokenRegex.lastIndex;
+
+    const [full, comment, openB, tagName, attrs, closeB] = match;
+    if (comment) {
+      out += `<span class="syn-comment">${escapeHtml(comment)}</span>`;
+    } else if (tagName) {
+      let highlightedAttrs = '';
+      if (attrs) {
+        highlightedAttrs = attrs.replace(/([\w:-]+)(=)("[^"]*"|'[^']*'|[^\s>]+)/g, (m, aName, eq, aVal) => {
+          return ` <span class="syn-attr">${escapeHtml(aName)}</span>${eq}<span class="syn-string">${escapeHtml(aVal)}</span>`;
+        });
+      }
+      out += `<span class="syn-bracket">${escapeHtml(openB)}</span><span class="syn-tag">${escapeHtml(tagName)}</span>${highlightedAttrs}<span class="syn-bracket">${escapeHtml(closeB)}</span>`;
+    } else {
+      out += escapeHtml(full);
+    }
+  }
+
+  if (lastIndex < code.length) {
+    out += escapeHtml(code.slice(lastIndex));
+  }
+
+  return out;
+}
+
+function highlightCSS(code) {
+  const tokenRegex = /(\/\*[\s\S]*?\*\/)|([.#@:]?[\w-]+(?=\s*\{))|([\w-]+(?=\s*:))|(:[ \t]*)([^;{}\n]+)/g;
+
+  let lastIndex = 0;
+  let out = '';
+  let match;
+
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out += escapeHtml(code.slice(lastIndex, match.index));
+    }
+    lastIndex = tokenRegex.lastIndex;
+
+    const [full, comment, selector, prop, colon, val] = match;
+    if (comment) {
+      out += `<span class="syn-comment">${escapeHtml(comment)}</span>`;
+    } else if (selector) {
+      out += `<span class="syn-selector">${escapeHtml(selector)}</span>`;
+    } else if (prop) {
+      out += `<span class="syn-prop">${escapeHtml(prop)}</span>`;
+    } else if (colon && val) {
+      out += `${escapeHtml(colon)}<span class="syn-value">${escapeHtml(val)}</span>`;
+    } else {
+      out += escapeHtml(full);
+    }
+  }
+
+  if (lastIndex < code.length) {
+    out += escapeHtml(code.slice(lastIndex));
+  }
+
+  return out;
+}
+
 function syntaxHighlight(code, className) {
-  if (!className || !className.includes('lang-')) return code;
-  const isCSS = className.includes('css');
-  const isHTML = className.includes('html');
-
-  let result = code;
-
-  if (isHTML) {
-    result = result
-      .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="syn-comment">$1</span>')
-      .replace(/(&lt;\/?)([\w-]+)/g, '<span class="syn-bracket">$1</span><span class="syn-tag">$2</span>')
-      .replace(/(\s)([\w-]+)(=)(&quot;[^"]*&quot;|&#39;[^']*&#39;)/g,
-        ' <span class="syn-attr">$2</span>$3<span class="syn-string">$4</span>')
-      .replace(/(&gt;)([^<]+)(&lt;)/g, (m, a, content, c) =>
-        `${a}<span class="syn-text">${content}</span>${c}`);
-  }
-
-  if (isCSS) {
-    result = result
-      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="syn-comment">$1</span>')
-      .replace(/([.#@:]?[\w-]+)\s*\{/g, '<span class="syn-selector">$1</span> {')
-      .replace(/([\w-]+)\s*:/g, '<span class="syn-prop">$1</span>:')
-      .replace(/:\s*([^;{}\n]+)/g, ': <span class="syn-value">$1</span>');
-  }
-
-  return result;
+  if (!className || !className.includes('lang-')) return escapeHtml(code);
+  if (className.includes('dart')) return highlightDart(code);
+  if (className.includes('js') || className.includes('javascript')) return highlightJS(code);
+  if (className.includes('html')) return highlightHTML(code);
+  if (className.includes('css')) return highlightCSS(code);
+  return escapeHtml(code);
 }
 
 // ==================== Scroll to Top ====================
