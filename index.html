@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CodeTech - المنصة التعليمية المتكاملة لشرح HTML وCSS وJavaScript وDart باللغة العربية مع محاكاة تفاعلية ومخرجات كونسول حية">
+  <meta name="description"
+    content="CodeTech - المنصة التعليمية المتكاملة لشرح HTML وCSS وJavaScript وDart باللغة العربية مع محاكاة تفاعلية ومخرجات كونسول حية">
   <meta name="keywords" content="HTML, CSS, JavaScript, Dart, Flutter, تعلم, برمجة, ويب, شرح مصري, عربي, OOP">
   <meta name="author" content="المهندس مصطفى جمال قابيل">
   <meta property="og:title" content="CodeTech - مرجع HTML وCSS وJavaScript وDart">
@@ -12,10 +14,11 @@
   <!-- Font Awesome 6 Icons (Free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
   <script>
     // تفعيل وضع الدارك فقط إذا كان المستخدم قد اختاره بنفسه، وإلا فالافتراضي هو اللايت مود
-    (function() {
+    (function () {
       try {
         var savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
@@ -23,279 +26,287 @@
         } else {
           document.documentElement.setAttribute('data-theme', 'light');
         }
-      } catch (e) {}
+      } catch (e) { }
     })();
   </script>
 </head>
+
 <body>
 
-<!-- ==================== DUAL HEADER ==================== -->
-<div class="header-container" id="siteHeaderContainer">
-  
-  <!-- 1. TOP HEADER (Logo, Search, Theme Toggle) -->
-  <header class="top-header">
-    <div class="top-header-start">
-      <!-- Mobile Menu Button -->
-      <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" id="menuBtn">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+  <!-- ==================== DUAL HEADER ==================== -->
+  <div class="header-container" id="siteHeaderContainer">
 
-      <!-- Logo -->
-      <a href="#" class="logo" onclick="switchCategory('html'); return false;">
-        <div class="logo-icon"><i class="fa-solid fa-laptop-code"></i></div>
-        <div class="logo-text-group">
-          <span class="logo-text">Code<span>Tech</span></span>
-          <span class="logo-tagline">مرجع البرمجة الاحترافي</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Center Search Input -->
-    <div class="search-wrapper">
-      <div class="search-input-wrap">
-        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="ابحث عن موضوع، دالة، تاج، كلاس، كود في كل اللغات..."
-          autocomplete="off"
-          spellcheck="false"
-        >
-        <span class="search-shortcut" title="البحث السريع">Ctrl + K</span>
-      </div>
-      <div id="searchResults"></div>
-    </div>
-
-    <!-- Top Header End: Theme Toggle -->
-    <div class="top-header-end">
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="التبديل إلى الوضع الليلي" aria-label="التبديل إلى الوضع الليلي">
-          <i class="fa-solid fa-moon"></i>
+    <!-- 1. TOP HEADER (Logo, Search, Theme Toggle) -->
+    <header class="top-header">
+      <div class="top-header-start">
+        <!-- Mobile Menu Button -->
+        <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" id="menuBtn">
+          <i class="fa-solid fa-bars"></i>
         </button>
-      </div>
-    </div>
-  </header>
 
-  <!-- 2. BOTTOM HEADER (Languages Bar) -->
-  <nav class="bottom-header" aria-label="لغات البرمجة والمسارات التعليمية">
-    <div class="bottom-header-inner">
-      <div class="subnav-label">
-        <span class="subnav-label-icon"><i class="fa-solid fa-layer-group"></i></span>
-        <span class="subnav-label-title">المسارات التعليمية:</span>
+        <!-- Logo -->
+        <a href="#" class="logo" onclick="switchCategory('html'); return false;">
+          <div class="logo-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="logo-text-group">
+            <span class="logo-text">Code<span>Tech</span></span>
+            <span class="logo-tagline">مرجع البرمجة الاحترافي</span>
+          </div>
+        </a>
       </div>
-      <div class="nav-tabs">
+
+      <!-- Center Search Input -->
+      <div class="search-wrapper">
+        <div class="search-input-wrap">
+          <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="search" id="searchInput" placeholder="ابحث عن موضوع، دالة، تاج، كلاس، كود في كل اللغات..."
+            autocomplete="off" spellcheck="false">
+          <span class="search-shortcut" title="البحث السريع">Ctrl + K</span>
+        </div>
+        <div id="searchResults"></div>
+      </div>
+
+      <!-- Top Header End: Theme Toggle -->
+      <div class="top-header-end">
+        <div class="header-actions">
+          <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="التبديل إلى الوضع الليلي"
+            aria-label="التبديل إلى الوضع الليلي">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. BOTTOM HEADER (Languages Bar) -->
+    <nav class="bottom-header" aria-label="لغات البرمجة والمسارات التعليمية">
+      <div class="bottom-header-inner">
+        <div class="subnav-label">
+          <span class="subnav-label-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <span class="subnav-label-title">المسارات التعليمية:</span>
+        </div>
+        <div class="nav-tabs">
+          <button class="nav-tab active" data-cat="html" onclick="switchCategory('html')">
+            <span class="nav-tab-icon"><i class="fa-brands fa-html5"></i></span>
+            <span class="nav-tab-title">HTML</span>
+            <span class="nav-tab-badge">HTML5</span>
+          </button>
+          <button class="nav-tab" data-cat="css" onclick="switchCategory('css')">
+            <span class="nav-tab-icon"><i class="fa-brands fa-css3-alt"></i></span>
+            <span class="nav-tab-title">CSS</span>
+            <span class="nav-tab-badge">CSS3</span>
+          </button>
+          <button class="nav-tab" data-cat="js" onclick="switchCategory('js')">
+            <span class="nav-tab-icon"><i class="fa-brands fa-js"></i></span>
+            <span class="nav-tab-title">JavaScript</span>
+            <span class="nav-tab-badge">ES6+</span>
+          </button>
+          <button class="nav-tab" data-cat="dart" onclick="switchCategory('dart')">
+            <span class="nav-tab-icon"><i class="fa-solid fa-bullseye"></i></span>
+            <span class="nav-tab-title">Dart</span>
+            <span class="nav-tab-badge">Dart 3 & OOP</span>
+          </button>
+          <button class="nav-tab" data-cat="flutter" onclick="switchCategory('flutter')">
+            <span class="nav-tab-icon"><i class="fa-brands fa-flutter"></i></span>
+            <span class="nav-tab-title">Flutter</span>
+            <span class="nav-tab-badge">Flutter</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- ==================== OVERLAY (Mobile) ==================== -->
+  <div id="overlay"></div>
+
+  <!-- ==================== LAYOUT ==================== -->
+  <div class="layout">
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Mobile Nav Tabs inside Sidebar -->
+      <div class="sidebar-nav-tabs">
         <button class="nav-tab active" data-cat="html" onclick="switchCategory('html')">
-          <span class="nav-tab-icon"><i class="fa-brands fa-html5"></i></span>
-          <span class="nav-tab-title">HTML</span>
-          <span class="nav-tab-badge">HTML5</span>
+          <i class="fa-brands fa-html5"></i> HTML
         </button>
         <button class="nav-tab" data-cat="css" onclick="switchCategory('css')">
-          <span class="nav-tab-icon"><i class="fa-brands fa-css3-alt"></i></span>
-          <span class="nav-tab-title">CSS</span>
-          <span class="nav-tab-badge">CSS3</span>
+          <i class="fa-brands fa-css3-alt"></i> CSS
         </button>
         <button class="nav-tab" data-cat="js" onclick="switchCategory('js')">
-          <span class="nav-tab-icon"><i class="fa-brands fa-js"></i></span>
-          <span class="nav-tab-title">JavaScript</span>
-          <span class="nav-tab-badge">ES6+</span>
+          <i class="fa-brands fa-js"></i> JavaScript
         </button>
         <button class="nav-tab" data-cat="dart" onclick="switchCategory('dart')">
-          <span class="nav-tab-icon"><i class="fa-solid fa-bullseye"></i></span>
-          <span class="nav-tab-title">Dart</span>
-          <span class="nav-tab-badge">Dart 3 & OOP</span>
+          <i class="fa-solid fa-bullseye"></i> Dart
         </button>
       </div>
-    </div>
-  </nav>
 
-</div>
-
-<!-- ==================== OVERLAY (Mobile) ==================== -->
-<div id="overlay"></div>
-
-<!-- ==================== LAYOUT ==================== -->
-<div class="layout">
-
-  <!-- ==================== SIDEBAR ==================== -->
-  <aside class="sidebar" id="sidebar">
-    <!-- Mobile Nav Tabs inside Sidebar -->
-    <div class="sidebar-nav-tabs">
-      <button class="nav-tab active" data-cat="html" onclick="switchCategory('html')">
-        <i class="fa-brands fa-html5"></i> HTML
-      </button>
-      <button class="nav-tab" data-cat="css" onclick="switchCategory('css')">
-        <i class="fa-brands fa-css3-alt"></i> CSS
-      </button>
-      <button class="nav-tab" data-cat="js" onclick="switchCategory('js')">
-        <i class="fa-brands fa-js"></i> JavaScript
-      </button>
-      <button class="nav-tab" data-cat="dart" onclick="switchCategory('dart')">
-        <i class="fa-solid fa-bullseye"></i> Dart
-      </button>
-    </div>
-
-    <!-- Sidebar Header -->
-    <div class="sidebar-header">
-      <span id="categoryIcon"><i class="fa-brands fa-html5"></i></span>
-      <span id="categoryTitle">HTML</span>
-      <span class="topics-count" id="topicsCount"><i class="fa-solid fa-book-open"></i> موضوع</span>
-    </div>
-
-    <!-- Topics List -->
-    <ul id="topicsList"></ul>
-  </aside>
-
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <main class="main">
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-      <span class="breadcrumb-icon"><i class="fa-solid fa-location-dot"></i></span>
-      <span id="breadcrumb">HTML > اختر موضوعاً</span>
-    </div>
-
-    <!-- Dynamic Content -->
-    <div id="mainContent">
-      <!-- Content rendered by JS -->
-    </div>
-  </main>
-
-</div><!-- end .layout -->
-
-<!-- ==================== FOOTER ==================== -->
-<footer class="site-footer" id="siteFooter">
-  <div class="footer-glow"></div>
-  <div class="footer-wrapper">
-    <div class="footer-grid">
-      
-      <!-- Brand & Project Info -->
-      <div class="footer-box footer-brand-box">
-        <div class="footer-logo">
-          <div class="footer-logo-icon"><i class="fa-solid fa-laptop-code"></i></div>
-          <div class="footer-logo-info">
-            <span class="footer-logo-title">Code<span>Tech</span></span>
-            <span class="footer-logo-sub">مرجع البرمجة الاحترافي</span>
-          </div>
-        </div>
-        <p class="footer-desc">
-          منصة تعليمية عربية متكاملة لشرح تقنيات الويب ولغة Dart الحديثة بأسلوب عملي مبسط مع محاكيات أكواد تفاعلية ومخرجات كونسول حقيقية خطوة بخطوة.
-        </p>
-        <div class="footer-badges">
-          <span class="footer-badge"><i class="fa-solid fa-code"></i> ويب ودارت</span>
-          <span class="footer-badge"><i class="fa-solid fa-bolt"></i> تفاعلي ومباشر</span>
-          <span class="footer-badge"><i class="fa-solid fa-mobile-screen-button"></i> متجاوب 100%</span>
-        </div>
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <span id="categoryIcon"><i class="fa-brands fa-html5"></i></span>
+        <span id="categoryTitle">HTML</span>
+        <span class="topics-count" id="topicsCount"><i class="fa-solid fa-book-open"></i> موضوع</span>
       </div>
 
-      <!-- Designer & Developer Credit + Contact -->
-      <div class="footer-box footer-developer-box">
-        <div class="dev-card">
-          <div class="dev-header">
-            <span class="dev-avatar"><i class="fa-solid fa-user-gear"></i></span>
-            <div class="dev-header-text">
-              <span class="dev-role-label">فخر الصناعة والتطوير</span>
-              <h3 class="dev-title">الموقع اتصمم و اتبرمج بواسطة</h3>
-            </div>
-          </div>
-          <div class="dev-name-banner">
-            <h2 class="engineer-name">المهندس مصطفى جمال قابيل</h2>
-          </div>
-          
-          <div class="contact-section">
-            <span class="contact-title">للتواصل المباشر والاستفسارات:</span>
-            <div class="contact-buttons-group">
-              <a href="tel:01090832443" class="contact-card-btn phone-action" title="اتصال هاتفي مباشر">
-                <span class="btn-icon"><i class="fa-solid fa-phone"></i></span>
-                <div class="btn-info">
-                  <span class="btn-label">اتصال هاتفي</span>
-                  <span class="btn-value" dir="ltr">01090832443</span>
-                </div>
-              </a>
-              <a href="https://wa.me/201090832443" target="_blank" rel="noopener noreferrer" class="contact-card-btn whatsapp-action" title="تواصل فوري عبر واتساب">
-                <span class="btn-icon"><i class="fa-brands fa-whatsapp"></i></span>
-                <div class="btn-info">
-                  <span class="btn-label">محادثة واتساب</span>
-                  <span class="btn-value" dir="ltr">01090832443</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+      <!-- Topics List -->
+      <ul id="topicsList"></ul>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <span class="breadcrumb-icon"><i class="fa-solid fa-location-dot"></i></span>
+        <span id="breadcrumb">HTML > اختر موضوعاً</span>
       </div>
 
-      <!-- Spiritual Reminder & Dua -->
-      <div class="footer-box footer-dua-box">
-        <div class="dua-container">
-          <div class="dua-icon-header">
-            <span class="prophet-icon"><i class="fa-solid fa-mosque"></i></span>
-            <span class="heart-pulse"><i class="fa-solid fa-heart"></i></span>
+      <!-- Dynamic Content -->
+      <div id="mainContent">
+        <!-- Content rendered by JS -->
+      </div>
+    </main>
+
+  </div><!-- end .layout -->
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-glow"></div>
+    <div class="footer-wrapper">
+      <div class="footer-grid">
+
+        <!-- Brand & Project Info -->
+        <div class="footer-box footer-brand-box">
+          <div class="footer-logo">
+            <div class="footer-logo-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="footer-logo-info">
+              <span class="footer-logo-title">Code<span>Tech</span></span>
+              <span class="footer-logo-sub">مرجع البرمجة الاحترافي</span>
+            </div>
           </div>
-          <div class="dua-content">
-            <h4 class="dua-main-phrase">ماتنساش تصلي على النبي ﷺ</h4>
-            <p class="dua-sub-phrase">و تدعيلي لو بفيدك بحاجه 🤲</p>
-          </div>
-          <div class="dua-divider"></div>
-          <p class="dua-hadith">
-            «مَنْ صَلَّى عَلَيَّ صَلَاةً صَلَّى اللَّهُ عَلَيْهِ بِهَا عَشْرًا»
+          <p class="footer-desc">
+            منصة تعليمية عربية متكاملة لشرح تقنيات الويب ولغة Dart الحديثة بأسلوب عملي مبسط مع محاكيات أكواد تفاعلية
+            ومخرجات كونسول حقيقية خطوة بخطوة.
           </p>
-          <div class="dua-pill">
-            <span><i class="fa-solid fa-hand-holding-heart"></i> دعوة في ظهر الغيب تصنع فارقاً</span>
+          <div class="footer-badges">
+            <span class="footer-badge"><i class="fa-solid fa-code"></i> ويب ودارت</span>
+            <span class="footer-badge"><i class="fa-solid fa-bolt"></i> تفاعلي ومباشر</span>
+            <span class="footer-badge"><i class="fa-solid fa-mobile-screen-button"></i> متجاوب 100%</span>
           </div>
         </div>
+
+        <!-- Designer & Developer Credit + Contact -->
+        <div class="footer-box footer-developer-box">
+          <div class="dev-card">
+            <div class="dev-header">
+              <span class="dev-avatar"><i class="fa-solid fa-user-gear"></i></span>
+              <div class="dev-header-text">
+                <span class="dev-role-label">فخر الصناعة والتطوير</span>
+                <h3 class="dev-title">الموقع اتصمم و اتبرمج بواسطة</h3>
+              </div>
+            </div>
+            <div class="dev-name-banner">
+              <h2 class="engineer-name">المهندس مصطفى جمال قابيل</h2>
+            </div>
+
+            <div class="contact-section">
+              <span class="contact-title">للتواصل المباشر والاستفسارات:</span>
+              <div class="contact-buttons-group">
+                <a href="tel:01090832443" class="contact-card-btn phone-action" title="اتصال هاتفي مباشر">
+                  <span class="btn-icon"><i class="fa-solid fa-phone"></i></span>
+                  <div class="btn-info">
+                    <span class="btn-label">اتصال هاتفي</span>
+                    <span class="btn-value" dir="ltr">01090832443</span>
+                  </div>
+                </a>
+                <a href="https://wa.me/201090832443" target="_blank" rel="noopener noreferrer"
+                  class="contact-card-btn whatsapp-action" title="تواصل فوري عبر واتساب">
+                  <span class="btn-icon"><i class="fa-brands fa-whatsapp"></i></span>
+                  <div class="btn-info">
+                    <span class="btn-label">محادثة واتساب</span>
+                    <span class="btn-value" dir="ltr">01090832443</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spiritual Reminder & Dua -->
+        <div class="footer-box footer-dua-box">
+          <div class="dua-container">
+            <div class="dua-icon-header">
+              <span class="prophet-icon"><i class="fa-solid fa-mosque"></i></span>
+              <span class="heart-pulse"><i class="fa-solid fa-heart"></i></span>
+            </div>
+            <div class="dua-content">
+              <h4 class="dua-main-phrase">ماتنساش تصلي على النبي ﷺ</h4>
+              <p class="dua-sub-phrase">و تدعيلي لو بفيدك بحاجه 🤲</p>
+            </div>
+            <div class="dua-divider"></div>
+            <p class="dua-hadith">
+              «مَنْ صَلَّى عَلَيَّ صَلَاةً صَلَّى اللَّهُ عَلَيْهِ بِهَا عَشْرًا»
+            </p>
+            <div class="dua-pill">
+              <span><i class="fa-solid fa-hand-holding-heart"></i> دعوة في ظهر الغيب تصنع فارقاً</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-
     </div>
-  </div>
 
-  <!-- Copyright Bottom Strip -->
-  <div class="footer-bottom-strip">
-    <div class="footer-bottom-inner">
-      <p class="copyright-text">
-        جميع الحقوق محفوظة © <span id="currentYear">2025</span> | تصميم وبرمجة <strong>المهندس مصطفى جمال قابيل</strong>
-      </p>
-      <div class="footer-quick-links">
-        <button class="footer-scroll-top-btn" onclick="scrollToTop()" title="الرجوع للأعلى">
-          <span>الرجوع للأعلى</span>
-          <span class="icon"><i class="fa-solid fa-arrow-up"></i></span>
-        </button>
+    <!-- Copyright Bottom Strip -->
+    <div class="footer-bottom-strip">
+      <div class="footer-bottom-inner">
+        <p class="copyright-text">
+          جميع الحقوق محفوظة © <span id="currentYear">2025</span> | تصميم وبرمجة <strong>المهندس مصطفى جمال
+            قابيل</strong>
+        </p>
+        <div class="footer-quick-links">
+          <button class="footer-scroll-top-btn" onclick="scrollToTop()" title="الرجوع للأعلى">
+            <span>الرجوع للأعلى</span>
+            <span class="icon"><i class="fa-solid fa-arrow-up"></i></span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- ==================== SCROLL TO TOP ==================== -->
-<button id="scrollTop" onclick="scrollToTop()" title="العودة للأعلى" aria-label="العودة للأعلى">
-  <i class="fa-solid fa-arrow-up"></i>
-</button>
+  <!-- ==================== SCROLL TO TOP ==================== -->
+  <button id="scrollTop" onclick="scrollToTop()" title="العودة للأعلى" aria-label="العودة للأعلى">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
-<!-- ==================== SCRIPTS ==================== -->
-<script src="js/data/html-data.js"></script>
-<script src="js/data/css-data.js"></script>
-<script src="js/data/js-data.js"></script>
-<script src="js/data/dart-data.js"></script>
-<script src="js/main.js"></script>
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="js/data/html-data.js"></script>
+  <script src="js/data/css-data.js"></script>
+  <script src="js/data/js-data.js"></script>
+  <script src="js/data/dart-data.js"></script>
+  <script src="js/data/flutter-data.js"></script>
+  <script src="js/main.js"></script>
 
-<!-- Update topics count after load -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    function updateCount() {
-      let data = HTML_DATA;
-      if (currentCategory === 'css') data = CSS_DATA;
-      else if (currentCategory === 'js') data = JS_DATA;
-      else if (currentCategory === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
-      const countEl = document.getElementById('topicsCount');
-      if (countEl && data && data.topics) {
-        countEl.innerHTML = `<i class="fa-solid fa-book-open"></i> ${data.topics.length} موضوع`;
+  <!-- Update topics count after load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      function updateCount() {
+        let data = HTML_DATA;
+        if (currentCategory === 'css') data = CSS_DATA;
+        else if (currentCategory === 'js') data = JS_DATA;
+        else if (currentCategory === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
+        else if (currentCategory === 'flutter' && typeof FLUTTER_DATA !== 'undefined') data = FLUTTER_DATA;
+        const countEl = document.getElementById('topicsCount');
+        if (countEl && data && data.topics) {
+          countEl.innerHTML = `<i class="fa-solid fa-book-open"></i> ${data.topics.length} موضوع`;
+        }
       }
-    }
-    updateCount();
-    // Patch switchCategory to also update count
-    const origSwitch = switchCategory;
-    window.switchCategory = function(cat) {
-      origSwitch(cat);
       updateCount();
-    };
-  });
-</script>
+      // Patch switchCategory to also update count
+      const origSwitch = switchCategory;
+      window.switchCategory = function (cat) {
+        origSwitch(cat);
+        updateCount();
+      };
+    });
+  </script>
 
 </body>
+
 </html>

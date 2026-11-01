@@ -54,6 +54,7 @@ function getCategoryIconHtml(category) {
     case 'css': return '<i class="fa-brands fa-css3-alt"></i>';
     case 'js': return '<i class="fa-brands fa-js"></i>';
     case 'dart': return '<i class="fa-solid fa-bullseye"></i>';
+    case 'flutter': return '<i class="fa-brands fa-flutter"></i>';
     default: return '<i class="fa-solid fa-code"></i>';
   }
 }
@@ -64,6 +65,7 @@ function renderSidebar(category) {
   if (category === 'css') data = CSS_DATA;
   else if (category === 'js') data = JS_DATA;
   else if (category === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
+  else if (category === 'flutter' && typeof FLUTTER_DATA !== 'undefined') data = FLUTTER_DATA;
   const list = document.getElementById('topicsList');
   const catTitle = document.getElementById('categoryTitle');
   const catIcon = document.getElementById('categoryIcon');
@@ -99,6 +101,7 @@ function switchCategory(cat) {
   if (cat === 'css') data = CSS_DATA;
   else if (cat === 'js') data = JS_DATA;
   else if (cat === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
+  else if (cat === 'flutter' && typeof FLUTTER_DATA !== 'undefined') data = FLUTTER_DATA;
   loadTopic(data.topics[0]);
 }
 
@@ -158,8 +161,8 @@ function getTopicCode(topic, category) {
   if (category === 'html') {
     return html;
   }
-  if (category === 'dart') {
-    return topic.example && topic.example.code ? topic.example.code : '// كود Dart';
+  if (category === 'dart' || category === 'flutter') {
+    return topic.example && topic.example.code ? topic.example.code : '// كود Dart / Flutter';
   }
   return html;
 }
@@ -167,27 +170,34 @@ function getTopicCode(topic, category) {
 // Render Example Section
 function renderExampleSection(topic) {
   const isDart = currentCategory === 'dart';
+  const isFlutter = currentCategory === 'flutter';
   const isJS = currentCategory === 'js';
   const isCSS = currentCategory === 'css';
 
-  if (isDart) {
-    const dartCode = getTopicCode(topic, 'dart');
-    const dartOutput = topic.example.output || '// لا توجد مخرجات مسجلة';
-    
+  if (isDart || isFlutter) {
+    const code = getTopicCode(topic, isFlutter ? 'flutter' : 'dart');
+    const output = topic.example.output || '// لا توجد مخرجات مسجلة';
+    const catClass = isFlutter ? 'cat-flutter' : 'cat-dart';
+    const envTitle = isFlutter ? 'بيئة تشغيل وتجربة Flutter الحية (Flutter DevTools & Engine)' : 'بيئة تشغيل Dart التفاعلية (DartPad & Terminal)';
+    const badgeText = isFlutter ? '<i class="fa-brands fa-flutter"></i> Flutter' : '<i class="fa-solid fa-bullseye"></i> Dart 3.x';
+    const tabCodeTitle = isFlutter ? 'كود Flutter' : 'كود Dart';
+    const filePath = isFlutter ? 'lib/main.dart' : 'bin/main.dart';
+    const copyLabel = isFlutter ? 'نسخ كود Flutter' : 'نسخ كود Dart';
+
     return `
       <div class="example-section" id="exSec-${topic.id}">
-        <div class="example-header cat-dart">
+        <div class="example-header ${catClass}">
           <div class="example-header-title">
             <i class="fa-solid fa-laptop-code"></i>
-            <span>بيئة تشغيل Dart التفاعلية (DartPad & Terminal)</span>
-            <span class="lang-badge"><i class="fa-solid fa-bullseye"></i> Dart 3.x</span>
+            <span>${envTitle}</span>
+            <span class="lang-badge">${badgeText}</span>
           </div>
           <div class="example-tabs">
             <button class="ex-tab active" id="tabBtnCode-${topic.id}" onclick="showDartTab('code', this, '${topic.id}')">
-              <i class="fa-solid fa-code"></i> كود Dart
+              <i class="fa-solid fa-code"></i> ${tabCodeTitle}
             </button>
             <button class="ex-tab" id="tabBtnTerm-${topic.id}" onclick="showDartTab('terminal', this, '${topic.id}')">
-              <i class="fa-solid fa-terminal"></i> مخرجات الكونسول
+              <i class="fa-solid fa-terminal"></i> مخرجات الكونسول والتشغيل
             </button>
             <button class="ex-tab split-toggle" id="splitBtn-${topic.id}" onclick="toggleSplitView('${topic.id}', this)" title="عرض الكود والمخرجات معاً جنباً إلى جنب">
               <i class="fa-solid fa-table-columns"></i> عرض متجاور
@@ -201,23 +211,23 @@ function renderExampleSection(topic) {
           <div class="tab-content active" id="tab-code-${topic.id}">
             <div class="code-toolbar">
               <div class="code-toolbar-start">
-                <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> bin/main.dart</span>
+                <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> ${filePath}</span>
               </div>
               <div class="code-toolbar-actions">
                 <button onclick="runDartSimulation('${topic.id}', true)" class="run-action-btn" title="تشغيل الكود والانتقال للكونسول">
-                  <i class="fa-solid fa-play"></i> تشغيل وشاهد الخرج
+                  <i class="fa-solid fa-play"></i> تشغيل وشاهد النتيجة
                 </button>
                 <button onclick="copyCode('${topic.id}')" class="copy-btn" id="copyBtn-${topic.id}">
-                  <i class="fa-regular fa-copy"></i> نسخ كود Dart
+                  <i class="fa-regular fa-copy"></i> ${copyLabel}
                 </button>
               </div>
             </div>
-            <pre class="code-block"><code class="lang-dart" id="code-${topic.id}">${escapeHtmlCode(dartCode)}</code></pre>
+            <pre class="code-block"><code class="lang-dart" id="code-${topic.id}">${escapeHtmlCode(code)}</code></pre>
           </div>
 
           <!-- Terminal Tab -->
           <div class="tab-content" id="tab-terminal-${topic.id}">
-            ${renderDartTerminalHtml(topic, dartOutput)}
+            ${renderDartTerminalHtml(topic, output)}
           </div>
         </div>
 
@@ -225,15 +235,15 @@ function renderExampleSection(topic) {
         <div class="split-view-container" id="splitView-${topic.id}" style="display: none;">
           <div class="split-view-col">
             <div class="code-toolbar">
-              <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> bin/main.dart</span>
+              <span class="code-toolbar-lang"><i class="fa-solid fa-file-code"></i> ${filePath}</span>
               <button onclick="copyCode('${topic.id}')" class="copy-btn">
                 <i class="fa-regular fa-copy"></i> نسخ
               </button>
             </div>
-            <pre class="code-block"><code class="lang-dart">${escapeHtmlCode(dartCode)}</code></pre>
+            <pre class="code-block"><code class="lang-dart">${escapeHtmlCode(code)}</code></pre>
           </div>
           <div class="split-view-col">
-            ${renderDartTerminalHtml(topic, dartOutput, true)}
+            ${renderDartTerminalHtml(topic, output, true)}
           </div>
         </div>
       </div>
@@ -301,7 +311,7 @@ function renderExampleSection(topic) {
 function renderDartTerminalHtml(topic, outputText, isSplit = false) {
   const termId = isSplit ? `termOut-split-${topic.id}` : `termOut-${topic.id}`;
   const statusId = isSplit ? `termStatus-split-${topic.id}` : `termStatus-${topic.id}`;
-  
+
   return `
     <div class="dart-terminal-card">
       <div class="dart-terminal-header">
@@ -416,7 +426,7 @@ function showWebTab(tabName, btn, topicId) {
 
 // Run Dart Simulation with compiling animation
 function runDartSimulation(topicId, switchToTab = false) {
-  const topic = currentTopic && currentTopic.id === topicId ? currentTopic : 
+  const topic = currentTopic && currentTopic.id === topicId ? currentTopic :
     (typeof DART_DATA !== 'undefined' ? DART_DATA.topics.find(t => t.id === topicId) : null);
   if (!topic || !topic.example) return;
 
@@ -532,7 +542,8 @@ function initSearch() {
       ...HTML_DATA.topics,
       ...CSS_DATA.topics,
       ...(typeof JS_DATA !== 'undefined' ? JS_DATA.topics : []),
-      ...(typeof DART_DATA !== 'undefined' ? DART_DATA.topics : [])
+      ...(typeof DART_DATA !== 'undefined' ? DART_DATA.topics : []),
+      ...(typeof FLUTTER_DATA !== 'undefined' ? FLUTTER_DATA.topics : [])
     ];
     const matches = allTopics.filter(t =>
       t.title.toLowerCase().includes(q) ||
@@ -583,6 +594,9 @@ function renderSearchResults(matches, container, query) {
     } else if (typeof DART_DATA !== 'undefined' && DART_DATA.topics.includes(topic)) {
       cat = 'Dart';
       catColor = '#0081cb';
+    } else if (typeof FLUTTER_DATA !== 'undefined' && FLUTTER_DATA.topics.includes(topic)) {
+      cat = 'Flutter';
+      catColor = '#0175c2';
     }
     const hl = (text) => text.replace(new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
       m => `<mark>${m}</mark>`);
@@ -608,6 +622,7 @@ function selectSearchResult(topicId, cat) {
   if (category === 'css') data = CSS_DATA;
   else if (category === 'js') data = JS_DATA;
   else if (category === 'dart' && typeof DART_DATA !== 'undefined') data = DART_DATA;
+  else if (category === 'flutter' && typeof FLUTTER_DATA !== 'undefined') data = FLUTTER_DATA;
   const topic = data.topics.find(t => t.id === topicId);
   if (!topic) return;
 
@@ -659,7 +674,7 @@ function escapeHtmlCode(str) {
 
 // ==================== Syntax Highlighters (Single-Pass Tokenizers) ====================
 function highlightDart(code) {
-  const tokenRegex = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(@\w+)|('''[\s\S]*?'''|"""[\s\S]*?"""|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b(?:void|int|double|num|bool|String|List|Map|Set|Future|Stream|StreamController|dynamic|Object|DateTime|Duration|RegExp|Exception|Error|Paint|Colors|PaintingStyle|Never|Null|Iterable|Runes|Symbol)\b)|(\b(?:class|abstract|extends|implements|with|mixin|enum|extension|on|factory|get|set|var|final|const|late|required|return|if|else|switch|case|break|continue|default|when|try|catch|finally|throw|rethrow|assert|async|await|yield|super|this|new|is|as|in|typedef|import|export|part|show|hide|null|true|false|base|interface|sealed)\b)|(\b(?:print|identical)\b)|(\b\d+(?:\.\d+)?\b)/g;
+  const tokenRegex = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(@\w+)|('''[\s\S]*?'''|"""[\s\S]*?"""|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b(?:void|int|double|num|bool|String|List|Map|Set|Future|Stream|StreamController|dynamic|Object|DateTime|Duration|RegExp|Exception|Error|Paint|Colors|PaintingStyle|Never|Null|Iterable|Runes|Symbol|Widget|BuildContext|StatelessWidget|StatefulWidget|State|Key|Scaffold|MaterialApp|AppBar|Container|Column|Row|Stack|Positioned|Expanded|Flexible|Center|SizedBox|Padding|Align|Card|Text|Icon|IconData|TextStyle|EdgeInsets|Color|Colors|Theme|ThemeData|ColorScheme|ListView|GridView|SliverAppBar|CustomScrollView|TextFormField|TextEditingController|GlobalKey|FormState|Form|Navigator|MaterialPageRoute|FutureBuilder|ChangeNotifier|ChangeNotifierProvider|Consumer|BlocProvider|BlocBuilder|Cubit|Bloc|Dio|SharedPreferences|Response|Uri|Curves|BorderRadius|BoxDecoration|BoxShadow|Offset|CircularProgressIndicator|ElevatedButton|IconButton|Badge|Drawer|NavigationBar|FloatingActionButton)\b)|(\b(?:class|abstract|extends|implements|with|mixin|enum|extension|on|factory|get|set|var|final|const|late|required|return|if|else|switch|case|break|continue|default|when|try|catch|finally|throw|rethrow|assert|async|await|yield|super|this|new|is|as|in|typedef|import|export|part|show|hide|null|true|false|base|interface|sealed)\b)|(\b(?:print|identical|debugPrint|runApp|setState|emit|notifyListeners)\b)|(\b\d+(?:\.\d+)?\b)/g;
 
   let lastIndex = 0;
   let out = '';
@@ -807,7 +822,7 @@ function highlightCSS(code) {
 
 function syntaxHighlight(code, className) {
   if (!className || !className.includes('lang-')) return escapeHtml(code);
-  if (className.includes('dart')) return highlightDart(code);
+  if (className.includes('dart') || className.includes('flutter')) return highlightDart(code);
   if (className.includes('js') || className.includes('javascript')) return highlightJS(code);
   if (className.includes('html')) return highlightHTML(code);
   if (className.includes('css')) return highlightCSS(code);

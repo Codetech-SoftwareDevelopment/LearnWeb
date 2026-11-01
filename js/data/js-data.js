@@ -47,6 +47,15 @@ console.log("مرحباً بك في عالم جافاسكريبت!");
 // إظهار نافذة تنبيه للمستخدم
 alert("أهلاً بك في CodeTech!");</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه هو الـ Execution Context في جافاسكريبت، وإزاي الكود بيتنفذ على مرحلتين؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> أي كود JS بيتنفذ داخل Execution Context بيمر بمرحلتين: 1) Memory Creation Phase: المتصفح بيمر على الكود ويحجز المتغيرات كـ undefined ويحفظ الدوال بالكامل (وده سر الـ Hoisting). 2) Code Execution Phase: يبدأ ينفذ الأوامر سطر بسطر ويعين القيم الحقيقية.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -124,6 +133,15 @@ document.getElementById("demo").innerHTML = "محتوى &lt;strong&gt;جديد&l
 
 // 3. نافذة تنبيه
 alert("تم حفظ البيانات بنجاح!");</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه محظور تماماً استخدام document.write() في التطبيقات الحديثة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن استدعاءها بعد اكتمال تحميل الصفحة بيمسح كل محتوى صفحة الـ HTML القديم بالكامل ويبني الصفحة من الصفر، وده بيدمر التطبيق تماماً ومحركات البحث بتعاقب المواقع اللي بتستخدمها.</div>
         </div>
       `,
       example: {
@@ -216,6 +234,15 @@ console.log(x); // ReferenceError: x is not defined (محمية بواسطة Blo
 user.age = 26; // ✅ مسموح تماماً لأننا نعدل خاصية داخل الكائن
 // user = { name: "علي" }; // ❌ TypeError: Assignment to constant variable</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه هو الـ Temporal Dead Zone (TDZ) وما الفرق الدقيق بين var و let و const؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ TDZ هي الفترة بين بداية نطاق البلوك (Block Scope) وبين السطر اللي بيتم فيه تعريف المتغير بـ let أو const. لو حاولت توصله في الفترة دي هيطلعلك ReferenceError فوراً، على عكس var اللي بيرجعلك undefined ومبيحترمش البلوك.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -306,6 +333,15 @@ typeof [1, 2, 3]    // "object" (المصفوفات كائنات)
 typeof { a: 1 }     // "object"
 typeof function(){} // "function"</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق بين Primitive Types و Reference Types من حيث التخزين في الذاكرة ومقارنة القيم؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Primitive (زي number, string, boolean) بتخزن قيمتها مباشرة في الـ Stack وتقارن بالقيمة. أما الـ Reference (زي Objects, Arrays) فتخزن المؤشر (Pointer) في الـ Stack بينما البيانات الضخمة في الـ Heap، وتقارن بعنوان الذاكرة (Memory Reference) وليس بالمحتوى الداخلي.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -394,6 +430,15 @@ typeof function(){} // "function"</code></pre>
           <li><strong><code>!</code> (NOT):</strong> تعكس القيمة المنطقية (true تصبح false والعكس).</li>
           <li><strong><code>??</code> (Nullish Coalescing):</strong> ترجع الطرف الأيمن فقط إذا كان الأيسر <code>null</code> أو <code>undefined</code> (تتجاهل 0 و "" و false).</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق الجوهري بين == و === وليه دايماً بنستخدم ===؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> معامل == بيعمل تحويل نوع تلقائي (Type Coercion) فممكن يخلي '0' == false ترجع true وده بيعمل كوارث وثغرات خفية! بينما === بيتحقق بصرامة من القيمة ومن نوع البيانات معاً بدون أي تهاون.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -491,6 +536,15 @@ switch (day) {
         </div>
         <div class="warning-box">
           <strong>⚠️ لا تنسَ <code>break</code>:</strong> إذا نسيت كتابة <code>break</code> في نهاية أي حالة case، فسيستمر المتصفح في تنفيذ الحالات التالية تلقائياً حتى لو لم يتحقق شرطها (Fall-through)!
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إمتى تفضل استخدام switch على if-else، وإيه هي ظاهرة الـ Fall-through؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تفضل switch لما يكون عندك متغير واحد بتفحص قيم متعددة ثابتة ليه. ظاهرة الـ Fall-through بتحصل لما تنسى تكتب كلمة break في نهاية الـ case، فالكود بيكمل تنفيذ كل الـ cases اللي بعدها حتى لو الشرط مش منطبق!</div>
         </div>
       `,
       example: {
@@ -595,6 +649,15 @@ for (const key in user) {
           <li><strong><code>break</code>:</strong> توقف الحلقة وتخرج منها نهائياً على الفور.</li>
           <li><strong><code>continue</code>:</strong> تتخطى الدورة الحالية فقط وتقفز للدورة التالية مباشرة.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين حلقة for...in وحلقة for...of؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> حلقة for...in مخصصة للمرور على أسماء المفاتيح (Keys / Properties) للكائنات، بينما حلقة for...of مخصصة للمرور على القيم الفعلية (Values) للعناصر القابلة للتكرار (Iterables) زي الـ Arrays والـ Strings والـ Sets.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -686,6 +749,15 @@ const square = x => x * x;</code></pre>
   return numbers.reduce((acc, curr) => acc + curr, 0);
 }
 sumAll(1, 2, 3, 4, 5); // 15</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفروق الجوهرية بين الـ Regular Functions والـ Arrow Functions؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Arrow Functions: 1) لا تملك كائن this خاص بها بل تأخذه من النطاق المحيط (Lexical this). 2) لا تملك كائن arguments. 3) لا يمكن استخدامها كـ Constructors بكلمة new. 4) لا تقبل الـ Hoisting.</div>
         </div>
       `,
       example: {
@@ -781,6 +853,15 @@ console.log(counter1()); // 3</code></pre>
           <br>1. تمكننا من حماية البيانات (Data Encapsulation / Private Variables) حتى لا يعبث بها أي كود خارجي.
           <br>2. تُستخدم بكثرة في إنشاء الدوال المصنعية (Factory Functions) ومكتبات إدارة الحالة مثل Redux و React Hooks.
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Closure واذكر مثالاً لاستخدامه في إخفاء البيانات (Data Privacy)؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Closure هو قدرة الدالة الداخلية على تذكر والوصول لمتغيرات الدالة الخارجية حتى بعد انتهاء تنفيذ الدالة الخارجية وخروجها من الـ Call Stack. بنستخدمه لعمل كبسولة للمتغيرات (Private Variables) بحيث محدش يعدلها من برة إلا عبر دوال مخصصة.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -872,6 +953,15 @@ console.log(fruits[fruits.length - 1]); // برتقال (العنصر الأخي
           <tr><td><code>indexOf(val)</code></td><td>إرجاع فهرس العنصر (أو -1 إذا لم يوجد)</td><td>❌ لا</td></tr>
           <tr><td><code>join(separator)</code></td><td>تحويل كل عناصر المصفوفة إلى نص واحد</td><td>❌ لا</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين الميثودات التي تغير المصفوفة الأصلية (Mutating) والتي ترجع مصفوفة جديدة (Non-mutating)؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الميثودات الـ Mutating (زي push, pop, splice, sort) بتعدل في نفس المصفوفة في الذاكرة. أما الـ Non-mutating (زي slice, concat, map, filter) بترجع نسخة جديدة تماماً، وهي المعيار الذهبي في أطر عمل زي React لتجنب المشاكل الجانبية (Side Effects).</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -968,6 +1058,15 @@ const sum = numbers.reduce((acc, curr) => acc + curr, 0); // 21
 
 // 4. البحث عن أول عنصر أكبر من 3
 const firstBig = numbers.find(n => n > 3); // 4</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين forEach و map، ولماذا لا يجوز استخدام forEach إذا كنت تريد إرجاع مصفوفة جديدة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> دالة forEach وظيفتها فقط تشغيل كود لكل عنصر بدون أي إرجاع (ترجع دائماً undefined). أما دالة map فتأخذ كل عنصر، وتطبق عليه دالة تحويل، وترجع مصفوفة جديدة بنفس الطول تماماً ومناسبة للـ Method Chaining.</div>
         </div>
       `,
       example: {
@@ -1084,6 +1183,15 @@ const fullProfile = { ...baseUser, role: "Admin", active: true };</code></pre>
           <li><code>Object.values(obj)</code>: ترجع مصفوفة بقيم كل الخصائص.</li>
           <li><code>Object.entries(obj)</code>: ترجع مصفوفة ثنائية تحتوي على كل <code>[key, value]</code>.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين الـ Shallow Copy والـ Deep Copy للكائنات في جافاسكريبت؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Shallow Copy (بـ Object.assign أو Spread Operator {...obj}) بينسخ الخصائص السطحية فقط، لكن الكائنات المتداخلة جواها بتفضل تشاور على نفس عنوان الذاكرة! أما الـ Deep Copy (بـ structuredClone(obj)) فينسخ كل المستويات بالكامل ويقطع أي صلة بالكائن الأصلي.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1172,6 +1280,15 @@ Math.min(5, 10, 2);// 2 (الأصغر)
 Math.max(5, 10, 2);// 10 (الأكبر)
 Math.random();     // رقم عشوائي بين 0 و 1 (مثلاً 0.7423)</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه في جافاسكريبت نتيجة 0.1 + 0.2 !== 0.3، وإزاي نحلها في التطبيقات المالية؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> بسبب معيار IEEE 754 لتمثيل الأرقام العشرية بالثنائي (Binary Floating-Point) الذي يسبب تقريباً طفيفاً (0.30000000000000004). الحل في التطبيقات الحساسة هو استخدام .toFixed(2) أو تحويل الأرقام لقروش وسنتات صحيحة أثناء الحساب.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1246,6 +1363,15 @@ const byParts = new Date(2025, 0, 15, 10, 30); // سنة، شهر (0=يناير)
           <tr><td><code>getSeconds()</code></td><td>الثواني</td><td>0 إلى 59</td></tr>
           <tr><td><code>getTime()</code></td><td>المللي ثانية منذ 1970</td><td>رقم ضخم ممتاز للمقارنات</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه ترقيم الشهور في كائن التاريخ Date بيبدأ من 0 مش من 1؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنه مستوحى من لغة C القديمة حيث كانت الشهور تُعامل كمصفوفة نصوص من 12 عنصراً يبدأ ترقيمها من الصفر (0 = January، و 11 = December). لتجنب اللخبطة بنستخدم مكاتب حديثة زي Intl.DateTimeFormat أو Day.js.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1334,6 +1460,15 @@ console.log(car1.accelerate()); // "تسارعت تويوتا إلى 90 كم/س"
 const tesla = new ElectricCar("تسلا", "أحمر", 100, 85);
 console.log(tesla.accelerate()); // ورثت ميثود التسارع من Car
 console.log(tesla.charge());     // ميثود مخصصة للسيارات الكهربائية</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Prototype Chain في جافاسكريبت، وهل كلاسات الـ ES6 كلاسات حقيقية؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> كلاسات ES6 هي مجرد سكر لغوي (Syntactic Sugar) فوق نموذج الوراثة بالنماذج الأولية (Prototypal Inheritance). الـ Prototype Chain هو سلسلة من الروابط؛ لما تبحث عن خاصية مش موجودة في الكائن، المتصفح بيطلع لـ __proto__ حتى يجدها أو يصل لـ null.</div>
         </div>
       `,
       example: {
@@ -1438,6 +1573,15 @@ console.log(tesla.charge());     // ميثود مخصصة للسيارات ال�
   return balance - amount;
 }</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين throw new Error('msg') وكتابة throw 'msg' العادية؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> إنشاء كائن Error حقيقي بيلتقط مسار تتبع المكدس (Stack Trace) كامل؛ فيعرفك الخطأ حصل في أنهي ملف وفي أنهي سطر بالظبط، بينما رمي نص بسيط يجعلك أعمى ولا يوفر أي معلومات تصحيح للأخطاء (Debugging).</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1509,6 +1653,15 @@ console.log(tesla.charge());     // ميثود مخصصة للسيارات ال�
 
         <div class="info-box">
           <strong>💡 المعيار الحديث:</strong> يُفضل دائماً استخدام <strong><code>querySelector</code></strong> و <strong><code>querySelectorAll</code></strong> لأنهما يدعمان نفس محددات CSS القوية التي تستخدمها بالفعل (مثل <code>.class</code> أو <code>#id</code> أو <code>ul > li:first-child</code>).
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين HTMLCollection و NodeList عند اختيار عناصر الـ DOM؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ HTMLCollection (من getElementsByClassName) هي مجموعة حية (Live) بتتحدث فوراً لو أي عنصر انحذف أو انضاف للـ DOM ولا تدعم forEach. أما NodeList (من querySelectorAll) فهي في الغالب لقطة ثابتة (Static Snapshot) وتدعم forEach مباشرة.</div>
         </div>
       `,
       example: {
@@ -1607,6 +1760,15 @@ link.removeAttribute("target");</code></pre>
 console.log(btn.dataset.productId); // "458"
 console.log(btn.dataset.price);     // "99"</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه استخدام innerHTML خطير جداً أمنياً وممنوع مع مدخلات المستخدمين، وإيه البديل الآمن؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنه بيفتح الباب لهجمات حقن الأكواد الخبيثة (Cross-Site Scripting - XSS) لو المستخدم كتب كود &lt;script&gt; أو صورة خبيثة. البديل الآمن للنصوص هو textContent لأنه بيعقم النص ويلغي أي تنفيذ للأكواد.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1680,6 +1842,15 @@ box.style.display = "none"; // لإخفاء العنصر</code></pre>
           <tr><td><code>classList.toggle("active")</code></td><td>إذا كان الكلاس موجوداً يحذفه، وإن لم يكن موجوداً يضيفه! (ممتاز للأزرار والقوائم)</td></tr>
           <tr><td><code>classList.contains("active")</code></td><td>فحص هل العنصر يملك هذا الكلاس (ترجع true أو false)</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين قراءة التنسيق عبر element.style وبين window.getComputedStyle(element)؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> خاصية element.style تقرأ فقط التنسيقات المكتوبة بـ Inline Style داخل تاج العنصر في HTML. أما window.getComputedStyle فتقرأ التنسيق الفعلي النهائي المطبق على العنصر في المتصفح بعد حساب كل ملفات CSS والوراثة.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1759,6 +1930,15 @@ container.appendChild(p);       // إدراج في نهاية الأب
           <li><strong>حذف العنصر مباشرة (الأسلوب الحديث):</strong> <code>element.remove();</code></li>
           <li><strong>حذف ابن بواسطة الأب:</strong> <code>parent.removeChild(child);</code></li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه هو الـ DocumentFragment وليه بنستخدمه عند إضافة عناصر كتيرة للـ DOM؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> هو حاوية وهمية في الذاكرة خفيفة جداً؛ بنجمع فيها آلاف العناصر الأول، وبعدين نضيف الـ Fragment للـ DOM بضغطة زر واحدة. ده بيوفر الأداء جداً ويمنع تكرار الـ Reflow والـ Repaint آلاف المرات.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1840,6 +2020,15 @@ container.appendChild(p);       // إدراج في نهاية الأب
 
         <div class="info-box">
           <strong>💡 نصيحة احترافية:</strong> استخدم دائماً الخصائص التي تنتهي بكلمة <code>Element</code> (مثل <code>firstElementChild</code> وليس <code>firstChild</code>) لتتجاهل المسافات الفارغة والنصوص وتتعامل مع تاجات الـ HTML الحقيقية فقط.
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين parentElement و parentNode، ومتى يختلفان؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> في 99% من الحالات هما نفس النتيجة، لكن الاختلاف الوحيد يظهر مع عنصر الجذر &lt;html&gt;؛ خاصية parentNode هترجع كائن document، بينما parentElement هترجع null لأن كائن document ليس Element حقيقي.</div>
         </div>
       `,
       example: {
@@ -1932,6 +2121,15 @@ btn.addEventListener("click", function(event) {
           <li><strong><code>event.preventDefault()</code>:</strong> يمنع السلوك الافتراضي للمتصفح (مثل منع تحديث الصفحة عند إرسال الـ Form أو منع الرابط من الانتقال).</li>
           <li><strong><code>event.stopPropagation()</code>:</strong> يمنع صعود الحدث للعناصر الآباء (Event Bubbling).</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Event Delegation وما فائدته العظيمة في تحسين أداء الصفحات؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> هو أسلوب عبقري بنحط فيه مستمع حدث (Event Listener) واحد فقط على العنصر الأب الكبير بدلاً من وضع 1000 مستمع على كل الأبناء، ونعتمد على خاصية صعود الأحداث (Event Bubbling) عبر e.target. ده بيوفر رامات المتصفح جداً وبيشتغل حتى مع العناصر التي تنضاف مستقبلاً!</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -2017,6 +2215,15 @@ const interval = setInterval(() => {
   console.log("ثانية: " + count);
   if (count === 5) clearInterval(interval); // إيقاف عند الوصول لـ 5
 }, 1000);</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه بنفضل requestAnimationFrame على setTimeout في عمل الأنيميشن السلس بالجافاسكريبت؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن requestAnimationFrame متزامنة تلقائياً مع معدل تحديث الشاشة للمستخدم (Refresh Rate 60Hz أو 120Hz)، وتتوقف تلقائياً لما المستخدم يغير التاب في المتصفح فتوفر طاقة البطارية والرامات، بعكس setTimeout التي تعمل بشكل عشوائي ومستهلك للطاقة.</div>
         </div>
       `,
       example: {
@@ -2110,6 +2317,15 @@ history.go(-2);    // الرجوع صفحتين للوراء</code></pre>
           <li><code>screen.width</code> / <code>screen.height</code>: العرض والارتفاع الكامل لشاشة الجهاز بالبكسل.</li>
           <li><code>screen.availWidth</code> / <code>screen.availHeight</code>: المساحة المتاحة بعد خصم شريط مهام نظام التشغيل.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين استخدام location.href وبين location.replace() عند توجيه المستخدم؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> خاصية location.href تضيف الصفحة الجديدة في سجل تصفح المتصفح (Browser History) فيقدر المستخدم يدوس زرار Back ويرجع. أما location.replace فتستبدل الصفحة الحالية وتمسحها من السجل، وممتازة بعد تسجيل الدخول حتى لا يرجع المستخدم لصفحة Login مرة أخرى.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -2170,6 +2386,15 @@ history.go(-2);    // الرجوع صفحتين للوراء</code></pre>
     console.error("فشل النسخ:", err);
   }
 }</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إزاي تراقب حالة اتصال المستخدم بالإنترنت (Online/Offline) في الوقت الفعلي؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> بفحص خاصية navigator.onLine، والاستماع لحدثين على مستوى نافذة المتصفح: window.addEventListener('online', ...) و window.addEventListener('offline', ...) لإظهار تنبيه فوري للمستخدم إذا انقطع الاتصال.</div>
         </div>
       `,
       example: {
@@ -2276,6 +2501,15 @@ localStorage.setItem("settings", JSON.stringify(userSettings));
 const saved = JSON.parse(localStorage.getItem("settings"));
 console.log(saved.volume); // 80</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفروق الجوهرية بين localStorage و sessionStorage و Cookies؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ localStorage دائمة ولا تنتهي إلا بمسحها وحجمها ~5MB ولا ترسل للسيرفر. الـ sessionStorage تنتهي بمجرد قفل تاب المتصفح. أما الـ Cookies فحجمها صغير جداً (4KB) وترسل تلقائياً مع كل طلب HTTP للسيرفر، وتستخدم لإدارة الجلسات مع خاصية HttpOnly لمنع سرقتها.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -2378,6 +2612,15 @@ fetchData
     console.log("اكتملت العملية سواء نجحت أو فشلت.");
   });</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Event Loop، وما الفرق بين الـ Microtasks Queue والـ Macrotasks Queue؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Event Loop هو المراقب اللي بينقل المهام من الطوابير للـ Call Stack لما يفضى. والـ Microtasks (وعود Promises و queueMicrotask) لها أولوية قصوى ويتم تفريغها بالكامل أولاً قبل الانتقال لأي Macrotask (زي setTimeout و setInterval و I/O).</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -2467,6 +2710,15 @@ fetchData
     console.error("فشل جلب البيانات:", error.message);
   }
 }</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه كود fetch مش بيرمي Error في catch لما السيرفر يرجع كود 404 أو 500؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن الـ Promise في fetch تفشل فقط لو حصل انقطاع حقيقي في الشبكة (Network Failure). أما استجابات 404 و 500 فتعتبر استجابة ناجحة للطلب، ولذلك يجب فحص response.ok يدويًا ورمي استثناء بنفسك: if (!res.ok) throw new Error(...).</div>
         </div>
       `,
       example: {

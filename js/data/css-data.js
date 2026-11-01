@@ -46,6 +46,15 @@ h1 {
         <div class="info-box">
           <strong>💡 معنى Cascading:</strong> CSS تُطبّق بترتيب متتالٍ (cascade). إذا تعارضت قواعد، تُطبّق الأحدث أو الأكثر تحديداً.
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق بين Inline و Internal و External CSS، وليه External هو الأفضل دائماً؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ External CSS بيفصل التنسيق تماماً في ملف .css خارجي، وده بيسمح للمتصفح بتخزينه في الكاش (Browser Cache) فيتحمل الموقع فورياً في الزيارات التالية، بالإضافة لسهولة صيانة وتطبيق الثيم على آلاف الصفحات دفعة واحدة.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -144,6 +153,15 @@ h1 {
           <tr><td><code>::after</code></td><td>محتوى بعد العنصر</td></tr>
           <tr><td><code>::placeholder</code></td><td>نص الـ placeholder</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إزاي المتصفح بيحسب أولوية المحددات (CSS Specificity) لما يحصل تعارض بين القواعد؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> بنظام النقاط الرباعي: !important يكتسح الكل، ثم Inline Style (1000 نقطة)، ثم الـ ID (100 نقطة)، ثم الـ Class والـ Pseudo-class (10 نقاط)، وأخيراً الـ Element Tags (نقطة واحدة). ولو تساوت النقاط تفوز القاعدة المكتوبة في الأسفل.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -285,6 +303,15 @@ background: linear-gradient(to right, #1a73e8, #0d47a1);
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 background: radial-gradient(circle, #1a73e8, #0d47a1);</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه المطورين المحترفين بيفضلوا نظام HSL على HEX و RGB في بناء أنظمة الألوان الحديثة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن HSL (درجة اللون، التشبع، الإضاءة) منطقي للبشر جداً؛ تقدر تعمل درجات Hover، والوضع الليلي (Dark Mode)، والظلال بمجرد تغيير رقم الـ Lightness فقط بدون تغيير كود اللون الأساسي.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -412,6 +439,15 @@ background: radial-gradient(circle, #1a73e8, #0d47a1);</code></pre>
   margin: 0;
   padding: 0;
 }</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين box-sizing: content-box و border-box، وليه بنحط border-box لكل العناصر؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> في content-box (الافتراضي القديم)، لما تديلك width: 200px وتضيف عليه padding: 20px، العرض الحقيقي بيكبر ويبقى 240px ويبوظ التصميم! أما border-box فبيخلي الـ 200px شاملة الـ padding والـ border، فالتصميم ميبوظش أبداً.</div>
         </div>
       `,
       example: {
@@ -554,6 +590,15 @@ background: radial-gradient(circle, #1a73e8, #0d47a1);</code></pre>
           <tr><td><code>align-self</code></td><td>محاذاة فردية للعنصر</td></tr>
           <tr><td><code>order</code></td><td>ترتيب العنصر</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الفرق بين justify-content و align-items، وكيف يؤثر flex-direction عليهما؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> خاصية justify-content بتتحكم في المحاذاة على المحور الرئيسي (Main Axis)، بينما align-items بتتحكم في المحور العمودي (Cross Axis). لما تغير flex-direction إلى column، المحاور بتتعكس تماماً فيصبح justify-content رأسياً و align-items أفقياً!</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -696,6 +741,15 @@ grid-template-columns: 250px 1fr 1fr;
 /* Responsive تلقائي */
 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إمتى تختار CSS Grid وإمتى تكتفي بـ Flexbox في مشروع حقيقي؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> القاعدة الذهبية: Flexbox مصمم للتعامل مع بُعد واحد (1D) إما صف أفقي أو عمود رأسي (زي شريط القوائم أو صف أزرار). بينما Grid مصمم للتعامل مع بُعدين (2D) صفوف وأعمدة معاً في نفس الوقت (زي تخطيط الصفحة الكاملة ومعارض الصور والمنتجات).</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -808,6 +862,15 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></pre>
 &lt;style&gt;
   body { font-family: 'Cairo', sans-serif; }
 &lt;/style&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق بين وحدتي rem و em، وليه rem هي المعيار القياسي لتحديد أحجام الخطوط؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> وحدة rem تنسب دائماً لعنصر الجذر &lt;html&gt; (Root Element)، فبيفضل مقاس الخط مستقر ومناسب لإعدادات تكبير الشاشة لذوي الهمم. بينما em تنسب لعنصر الأب المباشر، وممكن تتضاعف وتكبر بشكل غير متوقع (Compounding Issue).</div>
         </div>
       `,
       example: {
@@ -945,6 +1008,15 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></pre>
   /* name | duration | timing | delay | iteration | direction */
   animation: slideIn 0.5s ease 0s 1 normal forwards;
 }</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه تحريك العناصر باستخدام transform: translate() أفضل بمليون مرة في الأداء من تحريكها بـ top/left؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن transform بيتعالج مباشرة على كارت الشاشة (GPU Compositing) بدون ما يجبر المتصفح يعيد حساب المقاسات (Reflow) أو يعيد رسم الشاشة (Repaint)، فالحركة بتفضل ناعمة ومستقرة بـ 60/120 فريم في الثانية بدون أي تقطيع.</div>
         </div>
       `,
       example: {
@@ -1116,6 +1188,15 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></pre>
           <tr><td>عرض viewport</td><td><code>width: 100vw</code></td></tr>
           <tr><td>ارتفاع viewport</td><td><code>height: 100vh</code></td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">يعني إيه مبدأ Mobile-First Design وليه بنكتب Media Queries بـ min-width مش max-width؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> مبدأ Mobile-First يعني بنكتب الاستايل الأساسي لشاشات الموبايل الخفيفة الأول بدون media queries، وبعدين نوسع تدريجياً للشاشات الكبيرة بـ min-width. ده بيضمن أسرع وقت تحميل لأجهزة الموبايل الضعيفة ويتبع معايير Google Core Web Vitals.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1252,6 +1333,15 @@ color: var(--accent-color, #1a73e8);</code></pre>
 
         <div class="info-box">
           <strong>💡 فائدة:</strong> لتغيير ثيم الموقع بالكامل، غيّر فقط المتغيرات في <code>:root</code>!
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه ميزة CSS Custom Properties (المتغيرات الأصلية) مقارنة بمتغيرات SASS/SCSS؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> متغيرات CSS الأصلية بتفضل حية في المتصفح في الـ Runtime؛ يعني تقدر تقرأها وتعدلها بالجافاسكريبت فوراً لتفعيل الثيم الليلي (Dark Mode) بدون إعادة كومبايل، وبتحترم الـ Cascading والـ Inheritance عبر شجرة العناصر.</div>
         </div>
       `,
       example: {

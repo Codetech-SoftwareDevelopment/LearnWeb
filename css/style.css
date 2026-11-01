@@ -337,6 +337,13 @@ body {
   box-shadow: 0 4px 16px rgba(0, 129, 203, 0.45);
 }
 
+.nav-tab[data-cat="flutter"].active {
+  background: linear-gradient(135deg, #02569b, #0175c2);
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(1, 117, 194, 0.45);
+}
+
 .nav-tab.active .nav-tab-badge {
   background: rgba(255, 255, 255, 0.25);
   color: white;
@@ -743,6 +750,63 @@ body {
 
 .info-box strong, .warning-box strong { color: var(--text); }
 
+/* Interview Q&A Box */
+.interview-box {
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  margin: 22px 0 14px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  background: rgba(99, 102, 241, 0.07);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  border-right: 5px solid var(--accent);
+  color: var(--text);
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.interview-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
+}
+
+.interview-box-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.interview-box-header i {
+  font-size: 17px;
+}
+
+.interview-q {
+  font-weight: 800;
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.interview-a {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+[data-theme="dark"] .interview-box {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.35);
+  border-right-color: #818cf8;
+}
+
+[data-theme="dark"] .interview-box-header {
+  color: #a5b4fc;
+}
+
 /* Data Table */
 .data-table {
   width: 100%;
@@ -871,6 +935,10 @@ body {
 
 .example-header.cat-dart {
   background: linear-gradient(135deg, #0081cb, #01579b);
+}
+
+.example-header.cat-flutter {
+  background: linear-gradient(135deg, #02569b, #0175c2);
 }
 
 .example-header.cat-js {

@@ -39,6 +39,15 @@ const HTML_DATA = {
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه HTML مش لغة برمجة، وإيه الفرق الجوهري بينها وبين لغات البرمجة الحقيقية؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنها لغة ترميز وتوصيف (Markup Language) مفيهاش منطق برمجي (Logic) ولا شروط (if/else) ولا حلقات تكرار (loops) ولا عمليات حسابية؛ وظيفتها فقط هيكلة وتوصيف المحتوى للمتصفح عشان يعرف ده عنوان ولا فقرة ولا صورة.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -96,6 +105,15 @@ const HTML_DATA = {
 &lt;h4&gt;عنوان من المستوى الرابع&lt;/h4&gt;
 &lt;h5&gt;عنوان من المستوى الخامس&lt;/h5&gt;
 &lt;h6&gt;عنوان من المستوى السادس&lt;/h6&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه مينفعش نكرر تاج &lt;h1&gt; أكتر من مرة في الصفحة الواحدة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن محركات البحث (SEO) وقارئات الشاشة للمكفوفين (Screen Readers) بتعتبر &lt;h1&gt; هو العنوان الرئيسي الأوحد اللي بيعبر عن محتوى الصفحة كلها. تكراره بيشتت خوارزميات جوجل ويضعف ترتيب الصفحة في نتائج البحث.</div>
         </div>
       `,
       example: {
@@ -161,6 +179,15 @@ const HTML_DATA = {
 
         <div class="warning-box">
           <strong>⚠️ تنبيه:</strong> المتصفح يتجاهل المسافات الزائدة والأسطر الجديدة داخل <code>&lt;p&gt;</code>. استخدم <code>&lt;br&gt;</code> لفرض سطر جديد.
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق بين إنك تحط نصوص جوة &lt;p&gt; أو تحطها جوة &lt;div&gt; مع &lt;br&gt;؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تاج &lt;p&gt; عنصر دلالي (Semantic) بيعرف المتصفح إن دي فقرة نصية مستقلة وبيديها هوامش (Margin) طبيعية من فوق وتحت ويسهل قراءتها لأدوات الـ Accessibility، بينما &lt;div&gt; و &lt;br&gt; عناصر غير دلالية مخصصة للتقسيم ولا تعطي أي معنى لغوياً.</div>
         </div>
       `,
       example: {
@@ -232,6 +259,15 @@ const HTML_DATA = {
 &lt;!-- رابط للقسم في نفس الصفحة --&gt;
 &lt;a href="#section1"&gt;اذهب للقسم الأول&lt;/a&gt;
 &lt;div id="section1"&gt;هنا القسم الأول&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الثغرة الأمنية الخطيرة لما تستخدم target='_blank' وإزاي تحمي موقعك منها؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الصفحة الجديدة اللي اتفتحت بتقدر توصل للصفحة الأصلية وتتحكم فيها عبر كائن window.opener (ثغرة Tabnabbing). الحماية الحتمية هي إضافة: rel='noopener noreferrer' عشان تمنع أي تواصل أمني خبيث بين الصفحتين.</div>
         </div>
       `,
       example: {
@@ -311,6 +347,15 @@ const HTML_DATA = {
 
         <div class="info-box">
           <strong>💡 نصيحة:</strong> دائماً أضف خاصية <code>alt</code> للصور. تساعد محركات البحث وتُستخدم عند فشل تحميل الصورة وللمكفوفين.
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه خاصية alt في تاج &lt;img&gt; إجبارية في معايير الويب العالمية، وإيه الفرق بينها وبين title؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> خاصية alt هي النص البديل اللي بيتقرأ للمكفوفين عبر قارئات الشاشة وبيظهر لو الصورة منزلتش، وهو أساسي في الـ SEO. بينما title هو مجرد تلميح (Tooltip) بيظهر لما المستخدم يقف بالماوس على الصورة ولا يغني أبداً عن alt.</div>
         </div>
       `,
       example: {
@@ -401,6 +446,15 @@ const HTML_DATA = {
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إمتى تستخدم &lt;ul&gt; وإمتى &lt;ol&gt;، وإيه هي القوائم الوصفية &lt;dl&gt;؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> بنستخدم &lt;ol&gt; لما يكون ترتيب الخطوات فارق (زي وصفة طبخ أو خطوات دفع)، و &lt;ul&gt; لما الترتيب ميكونش فارق (زي قائمة مميزات أو شريط تنقل). أما &lt;dl&gt; (Description List) فبتستخدم للمصطلحات وتعريفاتها عبر &lt;dt&gt; للمصطلح و &lt;dd&gt; للشرح.</div>
         </div>
       `,
       example: {
@@ -526,6 +580,15 @@ const HTML_DATA = {
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه كان تصميم المواقع بالجداول زمان (Table-based layout) كارثة وتم حظرها في معايير الويب الحديثة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنها بتدمر معايير الـ Accessibility، وبتبطئ تحميل الصفحة جداً، وصعبة جداً في عمل الـ Responsive Design للموبايل، وتخالف مبدأ فصل المحتوى (HTML) عن الشكل والتنسيق (CSS).</div>
         </div>
       `,
       example: {
@@ -654,6 +717,15 @@ const HTML_DATA = {
   &lt;/fieldset&gt;
 &lt;/form&gt;</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين إرسال الفورم بطريقة GET وبطريقة POST؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> طريقة GET بتبعت البيانات مكشوفة في شريط الرابط (URL Query Params) ولها حد أقصى للحجم وبتتحفظ في الـ History (تستخدم للبحث والفلترة). أما POST فتبعت البيانات داخل جسم الطلب (Request Body) مشفرة ومحمية وبدون حد أقصى (تستخدم لتسجيل الدخول والبيانات الحساسة).</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -780,6 +852,15 @@ const HTML_DATA = {
   &lt;/footer&gt;
 &lt;/body&gt;</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ليه التاجات الدلالية (Semantic HTML5) زي &lt;article&gt; و &lt;section&gt; أهم بمليون مرة من الـ &lt;div&gt;؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنها بتشرح بوضوح معنى المحتوى للمتصفح، ولمحركات البحث (SEO Ranking)، ولقارئات الشاشة لذوي الهمم. استخدام Semantic Tags بيخلي كودك نظيف وسهل الصيانة وقابل للأرشفة السريعة في جوجل.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -905,6 +986,15 @@ const HTML_DATA = {
   وهذا عادي مرة أخرى.
 &lt;/p&gt;</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفرق بين عناصر الـ Block وعناصر الـ Inline، وهل ينفع نحط &lt;div&gt; جوة &lt;span&gt;؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Block (زي &lt;div&gt;) بيبدأ سطر جديد وبياخد عرض الصفحة كامل ويقبل width و height. أما الـ Inline (زي &lt;span&gt;) بياخد فقط مساحة محتواه ولا يبدأ سطر جديد. لا يجوز وضع Block جوة Inline وفق معايير W3C القياسية.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -996,6 +1086,15 @@ const HTML_DATA = {
   &lt;!-- تحديث تلقائي كل 30 ثانية --&gt;
   &lt;meta http-equiv="refresh" content="30"&gt;
 &lt;/head&gt;</code></pre>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه وظيفة سطر meta viewport، وإيه هي تاجات الـ Open Graph (OG)؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> سطر viewport هو المسؤول عن تفعيل التجاوب مع شاشات الموبايل (Responsive) بدون تصغير الخطوط لدرجة المجهر. أما تاجات OG فتحدد الصورة والعنوان والوصف اللي بيظهروا لما تاخد رابط موقعك وتشاركه على فيسبوك أو واتساب أو لينكد إن.</div>
         </div>
       `,
       example: {
@@ -1113,6 +1212,15 @@ const HTML_DATA = {
   allowfullscreen&gt;
 &lt;/iframe&gt;</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إزاي تضمن تشغيل الفيديو والصوت على كل المتصفحات القديمة والحديثة بكفاءة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> عن طريق توفير تاجات &lt;source&gt; متعددة بصيغ مختلفة (MP4 مع H.264، و WebM، و Ogg) داخل تاج &lt;video&gt;، مع كتابة نص بديل للمتصفحات القديمة التي لا تدعم HTML5 Media.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>
@@ -1207,6 +1315,15 @@ const HTML_DATA = {
           <tr><td><code>url</code></td><td>رابط URL</td><td>https://example.com</td></tr>
           <tr><td><code>hidden</code></td><td>حقل مخفي</td><td>لا يظهر للمستخدم</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">إيه الفائدة العملية لاستخدام type='email' أو type='tel' بدلاً من type='text' العادي؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> فائدتين عظيمتين: 1) تفعيل لوحة المفاتيح المخصصة في الموبايل تلقائياً (إظهار علامة @ في الإيميل ولوحة أرقام في الهاتف). 2) تفعيل التحقق التلقائي المدمج في المتصفح (Built-in Client Validation) قبل إرسال الفورم.</div>
+        </div>
       `,
       example: {
         html: `<!DOCTYPE html>

@@ -58,6 +58,15 @@ void main() {
           <tr><td>الإنتاج (Production)</td><td><strong>AOT Native Compiler</strong></td><td>أداء خيالي وسرعة فتح فورية بدون أي لاج.</td></tr>
           <tr><td>الويب (Web Apps)</td><td><strong>dart2js & Wasm</strong></td><td>توليد كود JavaScript فائق السرعة أو كود WebAssembly عالي الكفاءة.</td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين JIT و AOT في Dart، ولماذا هذا المزيج هو سر قوة Flutter؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تستخدم Dart تقنية JIT أثناء التطوير لتشغيل الـ Hot Reload وتعديل الكود في أقل من ثانية بدون فقدان الحالة. وعند الإنتاج تستخدم AOT لتحويل الكود مباشرة إلى Machine Code أصلي (ARM64) فائق السرعة بدون وسيط JavaScript Bridge.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -115,6 +124,15 @@ Process finished with exit code 0`
             <li><strong>var:</strong> دارت بتستنتج النوع أول مرة وتثبت عليه للأبد (Type Inference). لو كتبت <code>var x = "Mostafa";</code> دارت فهمت إن x نص، ولو جيت في السطر اللي بعده وقولت <code>x = 50;</code> الكومبايلر هيرفض ويطلع Error فوراً!</li>
             <li><strong>dynamic:</strong> بتعطل كل فحوصات النوع في Dart! المتغير ممكن يشيل نص وبعدين رقم وبعدين لستة، وده خطير جداً لأن أي خطأ في كتابة اسم دالة هيرمي كراش في وش المستخدم في الرن تايم! استخدمها فقط لما تكون مضطر (زي استلام داتا غير معروفة تماماً من شبكة).</li>
           </ul>
+        </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الدقيق بين var و dynamic و Object في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> مع var دارت تستنتج النوع أول مرة وتثبت عليه للأبد (Type Safe). مع Object المتغير يقبل أي قيمة غير null لكن لا يمكنك مناداة دوال إلا الموجودة في كلاس Object. أما dynamic فتعطل فحص الأنواع تماماً وتسمح باستدعاء أي ميثود وتسبب كراش في الرن تايم لو الميثود غير موجودة.</div>
         </div>
       `,
       "example": {
@@ -178,6 +196,15 @@ Process finished with exit code 0`
           <tr><td><code>!</code></td><td>(Bang Operator) قسَم للكومبايلر إنه مش null</td><td><code>print(userPhone!)</code> (استخدمها بحذر!)</td></tr>
           <tr><td><code>late</code></td><td>تأجيل التعيين: بوعدك إني هديله قيمة قبل ما أقرأه</td><td><code>late String databaseUrl;</code></td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو Sound Null Safety وما الفرق بين المعاملات ? و ! و late؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> هو أمان تام يضمن في وقت الكومبايل أن المتغير العادي مستحيل يحمل null. علامة ? تجعل النوع اختيارياً يقبل null. علامة ! تقسم للكومبايلر أن المتغير ليس null. وكلمة late تؤجل التعيين مع التعهد بتهيئته قبل أول قراءة لتجنب LateInitializationError.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -244,6 +271,15 @@ Process finished with exit code 0`
           <tr><td>استهلاك الذاكرة</td><td>نسخة واحدة مشتركة في الذاكرة لكل التطبيق.</td><td>كائن جديد في الذاكرة في كل مرة يتنفذ فيها.</td></tr>
           <tr><td>مثال واقعي</td><td>رابط ثابت: <code>const url = 'https://api...';</code></td><td>الوقت الحالي: <code>final now = DateTime.now();</code></td></tr>
         </table>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين final و const في لغة Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> المتغير final يُعين مرة واحدة فقط ويمكن معرفة قيمته في وقت التشغيل (Runtime) مثل DateTime.now(). أما const فيجب أن تكون قيمته معروفة ومحسوبة بالكامل في وقت الكومبايل (Compile-time Constant) وتُخزن بنسخة وحيدة في الذاكرة لتوفير الأداء.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -298,6 +334,15 @@ Process finished with exit code 0`
 
         <h3>3. معاملات فحص وتحويل الأنواع (<code>is</code>, <code>is!</code>, <code>as</code>)</h3>
         <p><code>is</code> بتفحص هل الكائن من نوع معين؟ ودارت بتعمل بعدها <em>Smart Cast</em> تلقائي؛ يعني لو الشرط صح، دارت بتتعامل مع المتغير كأنه من النوع ده مباشرة بدون كاستنج يدوي!</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Cascade Notation (..) والـ Spread Operator (...) في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Cascade (..) يسمح بإجراء سلسلة عمليات وتعديل خصائص على نفس الكائن بدون تكرار اسمه وإرجاع الكائن نفسه. أما الـ Spread (...) فيسمح بنثر عناصر قائمة أو خريطة بالكامل داخل قائمة أخرى بسهولة.</div>
+        </div>
       `,
       "example": {
         "code": `class CustomerCart {
@@ -370,6 +415,15 @@ Process finished with exit code 0`
   Status.error => 'Network error occurred',
 };</code></pre>
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هي ميزة الـ Pattern Matching والـ Guard Clauses في Dart 3؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تسمح بفحص وتفكيك هياكل البيانات المعقدة والـ Records دفعة واحدة داخل جملة switch التعبيرية واستخدام كلمة when لإضافة شروط منطقية فرعية بدون تداخل أكواد if المرهقة.</div>
+        </div>
       `,
       "example": {
         "code": `enum DeliveryStatus { pending, preparing, onTheWay, delivered, cancelled }
@@ -425,6 +479,15 @@ Process finished with exit code 0`
           <li><code>break</code>: للخروج من الحلقة فوراً وإنهاء التكرار.</li>
           <li><code>continue</code>: لتخطي العنصر الحالي فوراً والدخول في العنصر اللي بعده.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">لماذا يفضل المطورون استخدام الدوال الوظيفية (where, map) على حلقات for التقليدية؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأنها توفر كوداً تصريحياً (Declarative) أنظف، ولا تعدل في المجموعة الأصلية بل ترجع Iterable كسول (Lazy) لا يحسب العناصر إلا عند الحاجة الفعلية (.toList())، مما يحسن استهلاك الذاكرة.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -491,6 +554,15 @@ Process finished with exit code 0`
           <li><strong>Named Parameters <code>{}</code>:</strong> بتستدعيها باسمها (نفس طريقة ويدجتس فلاتر بالضبط: <code>Text('Hello', style: TextStyle(...))</code>). تقدر تحط قبلها <code>required</code> لو إجبارية، أو تديها قيمة افتراضية لو اختيارية.</li>
           <li><strong>Arrow Functions <code>=></code>:</strong> دالة سهمية مختصرة لما تكون الدالة سطر واحد بس ترجع قيمة.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين الـ Positional Parameters والـ Named Parameters في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Positional تعتمد على ترتيب إرسال القيم ومحاطة بأقواس معقوفة [ ] إذا كانت اختيارية. أما الـ Named فتُحاط بأقواس مجعدة { } وتعتمد على اسم المتغير عند الاستدعاء ويمكن إلزامها بكلمة required، وهي الأسلوب القياسي في كل ودجتس Flutter.</div>
+        </div>
       `,
       "example": {
         "code": `// دالة احترافية بباراميترات مسماة واختيارية
@@ -559,6 +631,15 @@ Process finished with exit code 0`
           <li><code>.map((item) => transform)</code>: لتحويل كل عنصر في القائمة لشكل تاني (زي تحويل قائمة نصوص لويدجت في فلاتر).</li>
           <li><code>.reduce((sum, item) => ...)</code>: لدمج كل عناصر القائمة في قيمة واحدة نهائية (زي حساب مجموع الأسعار).</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هي ميزة Collection If و Collection For داخل القوائم في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تسمح ببناء عناصر القائمة بشكل شرطي أو تكراري مباشرة داخل تعريف القائمة [if (isLoggedIn) LogoutButton()] بدون الحاجة لإنشاء قائمة فارغة وإضافة العناصر إليها بالـ add()، وهي حجر الأساس في واجهات فلاتر.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -619,6 +700,15 @@ Process finished with exit code 0`
 
         <h3>2. القواميس والخرائط (Maps)</h3>
         <p>الـ <code>Map<Key, Value></code> بتخزن البيانات في صورة (مفتاح وقيمة). دي الطريقة القياسية اللي بتمثل ملفات الـ JSON في Dart و Flutter، فغالباً كل استجابات السيرفر بتستقبلها كـ <code>Map<String, dynamic></code>.</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">لماذا يعد البحث داخل Set أسرع بآلاف المرات من البحث داخل List في المجموعات الكبيرة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> لأن الـ Set مبنية على خوارزمية Hash Table وزمن البحث فيها O(1) ثابت مهما كبر حجم البيانات، بينما الـ List تتطلب المرور الخطي O(N) على كل العناصر من البداية للنهاية للتأكد من وجود العنصر.</div>
+        </div>
       `,
       "example": {
         "code": `void main() {
@@ -685,6 +775,15 @@ Process finished with exit code 0`
 
         <h3>2. تفكيك البيانات (Destructuring)</h3>
         <p>تقدر تفكك قيم الـ Record أو الـ Map أو الـ List في متغيرات مستقلة بسطر كود واحد أنيق وسريع!</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">كيف حلت ميزة الـ Records في Dart 3 مشكلة إرجاع أكثر من قيمة من دالة واحدة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> سابقاً كنت تضطر لإنشاء كلاس مخصص أو إرجاع Map عشوائية. في Dart 3 أصبحت الـ Records نوعاً أصلياً يجمع قيماً متباينة بأنواع آمنة وخفيفة الوزن مثل (String, int) getInfo() وتفكيكها بـ (name, age) = getInfo().</div>
+        </div>
       `,
       "example": {
         "code": `// دالة ترجع Record فيه 3 قيم بأنواع مختلفة ومحمية
@@ -747,6 +846,15 @@ Process finished with exit code 0`
           <li><code>finally</code>: كود بيتنفذ في جميع الأحوال (سواء حصل خطأ أو محصلش) عشان ينظف الموارد أو يقفل اللودينج.</li>
           <li><code>throw</code>: لرمي استثناء بنفسك لما شرط أمني يفشل.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين catch (e) واستخدام on ExceptionType catch (e) في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> استخدام on يتيح التقاط نوع محدد من الأخطاء (مثل SocketException لانقطاع النت) والتعامل معه بذكاء، مع إمكانية كتابة كتل on متعددة لنفس كتلة try، بينما catch العامة تلتقط أي خطأ عشوائي بدون تفرقة.</div>
+        </div>
       `,
       "example": {
         "code": `// كلاس استثناء مخصص للعمليات المالية
@@ -823,6 +931,15 @@ Process finished with exit code 0`
           <li><strong>Fields (الخصائص):</strong> البيانات اللي بتوصف حالة الكائن (زي الاسم، السعر، اللون).</li>
           <li><strong>Methods (السلوكيات):</strong> الوظائف والدوال اللي الكائن يقدر ينفذها (زي تسجيل الدخول، الشحن، الحفظ).</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">لماذا نقوم بعمل Override لدالتي == و hashCode في كلاسات Dart أو استخدام باكيج Equatable؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> افتراضياً، تقارن Dart الكائنات بعنوان الذاكرة (Referential Equality)، فكائنين بنفس البيانات بالضبط يعتبران غير متساويين! إعادة تعريف دالة == و hashCode تجعل المقارنة مبنية على قيم الخصائص الداخلية، وهو أمر حيوي في إدارة حالة فلاتر.</div>
+        </div>
       `,
       "example": {
         "code": `class SmartPhone {
@@ -894,6 +1011,15 @@ Process finished with exit code 0`
           <li><strong>Factory Constructors:</strong> المشيد اللي بيستخدم كلمة <code>factory</code>، ومش بالضرورة يعمل كائن جديد كل مرة؛ ممكن يرجع كائن متسجل مسبقاً (Cache) أو يحول استجابة JSON لكائن.</li>
           <li><strong>Const Constructors:</strong> لبناء كائنات ثابتة في الذاكرة (وهي المفتاح الأهم في تسريع ويدجتس فلاتر).</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق الجوهري بين Generative Constructor و Factory Constructor في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Generative يقوم دائماً بحجز وإنشاء كائن جديد من الكلاس في الذاكرة. أما الـ Factory فلا يقوم بالضرورة بحجز كائن جديد؛ يمكنه إرجاع كائن موجود مسبقاً من الكاش (Singleton Pattern) أو إرجاع نسخة من كلاس فرعي (Subclass).</div>
+        </div>
       `,
       "example": {
         "code": `class AppUser {
@@ -971,6 +1097,15 @@ Process finished with exit code 0`
           <br>
           <em>ملحوظة ذهبية:</em> الخصوصية في دارت بتكون على مستوى <strong>الملف (Library-private)</strong> مش على مستوى الكلاس فقط؛ يعني لو كود تاني في نفس الملف هيقدر يشوفها، لكن أي ملف تاني مستحيل يقدر يوصلها مباشرة!
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">كيف تطبق لغة Dart مبدأ التغليف (Privacy) بدون كلمات private أو protected؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> عن طريق بادئة الشرطة السفلية (_) قبل اسم المتغير أو الدالة. وتكون الخصوصية في دارت على مستوى المكتبة/الملف (Library-private) وليس على مستوى الكلاس فقط؛ أي عنصر يبدأ بـ _ لا يمكن الوصول إليه من أي ملف خارجي.</div>
+        </div>
       `,
       "example": {
         "code": `class BankWallet {
@@ -1045,6 +1180,15 @@ Process finished with exit code 0`
           <li><code>@override</code>: بنحطها فوق الدالة لما نحب نغير أو نعيد كتابة سلوك الدالة اللي ورثناها من الأب بشكل يناسب الابن.</li>
           <li><strong>Polymorphism (تعدد الأشكال):</strong> إنك تعامل كائنات من أبناء مختلفين كأنهم كائن من نفس النوع الأب المشترك بينهم.</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين extends و implements في لغة Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> مع extends (الوراثة العادية) ترث الكود والخصائص والتنفيذ الفعلي ويمكنك عمل override لبعضها فقط. مع implements (الواجهات) تعامل الكلاس كـ Interface وتجبر على إعادة كتابة وتنفيذ كل الدوال والخصائص من الصفر بدون وراثة أي كود فعلي.</div>
+        </div>
       `,
       "example": {
         "code": `// الكلاس الأساسي المشترك
@@ -1123,6 +1267,15 @@ Process finished with exit code 0`
           <strong>💡 ملحوظة هامة في Dart:</strong>
           دارت مفيهاش كلمة <code>interface</code> منفصلة؛ كل كلاس في دارت بيشتغل كـ Interface تلقائياً تقدر تستخدم معاه كلمة <strong><code>implements</code></strong> وتلتزم بتنفيذ كل دواله وخصائصه بدون ما تورث أكواده الداخلية!
         </div>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">هل تمتلك Dart كلمة interface وما الفرق بين الكلاس العادي والـ Abstract Class؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> في Dart كل كلاس هو واجهة ضمنية (Implicit Interface). لا يمكنك إنشاء كائن (Instance) من الـ Abstract Class بكلمة new، ويُستخدم كعقد وقالب أساسي تُشتق منه الكلاسات الفرعية وتُطبق دواله المجردة.</div>
+        </div>
       `,
       "example": {
         "code": `// عقد بوابة الدفع في المتجر الإلكتروني
@@ -1191,6 +1344,15 @@ Process finished with exit code 0`
         <p>في لغات البرمجة، الوراثة المتعددة (إن الكلاس يورث من كلاسين في نفس الوقت) بتعمل مشاكل مشهورة اسمها The Diamond Problem، عشان كدة Dart بتمنع الوراثة من أكتر من كلاس واحد.</p>
         <p>بدلاً من كدة، Dart بتقدم ميزة عبقرية اسمها <strong>Mixin</strong> باستخدام كلمة <code>with</code>: هي كبسولة سلوكيات ووظائف تقدر تركبها على أي كلاس مهما كانت شجرة عيلته!</p>
         <p>في Flutter بنستخدم الـ Mixin في كل مكان، أشهرهم <code>SingleTickerProviderStateMixin</code> لعمل الأنيميشن الرائع.</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هو الـ Mixin في Dart ولماذا نستخدمه بدلاً من الوراثة المتعددة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> هو أسلوب لإعادة استخدام كود ودوال عبر كلاسات متعددة غير مشتركة في نفس شجرة الوراثة بدون الوقوع في مشاكل الوراثة المتعددة (Diamond Problem). يتم دمجه بكلمة with ويمكن تقييد استخدامه بكلمة on.</div>
+        </div>
       `,
       "example": {
         "code": `// ميكسن لإضافة قدرة التسجيل وطباعة اللوجز
@@ -1244,6 +1406,15 @@ Process finished with exit code 0`
         <h2>دوال التوسيع (Extension Methods)</h2>
         <p>كتير بتحتاج دوال مساعدة معينة، مثلاً تفحص هل الـ String إيميل سليم؟ أو تحول رقم لسعر بالدولار؟</p>
         <p>زمان كنت بتضطر تعمل كلاس Utilities وتنادي <code>Utils.isValidEmail(text)</code>. في Dart، تقدر تعمل <strong>Extension</strong> يضيف الدالة دي مباشرة جوة كلاس <code>String</code> نفسه، فتقدر تكتب: <code>text.isValidEmail</code> وكأنها دالة أصلية من Google!</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هي Extension Methods ومتى تكون الحل الأمثل في مشاريع Flutter؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تسمح بإضافة وظائف ودوال جديدة لكلاسات جاهزة ومكتبات خارجية (مثل String أو BuildContext أو DateTime) بدون تعديل الكود المصدري الأصلي وبدون استخدام الوراثة، مما يجعل الكود نظيفاً ومختصراً جداً.</div>
+        </div>
       `,
       "example": {
         "code": `// توسيع كلاس String لإضافة وظائف فحص وتنسيق
@@ -1294,6 +1465,15 @@ Process finished with exit code 0`
         <h2>إيه هي الـ Generics؟</h2>
         <p>الـ Generics بتخليك تكتب كود يعيد استخدام نفسه مع <strong>أي نوع بيانات</strong> بدلاً من تكرار الكود لكل نوع (نوع أرقام، نوع نصوص، نوع كائنات)، مع الاحتفاظ بـ 100% من أمان الأنواع الصارمة (Type Safety).</p>
         <p>الحرف <code>T</code> هو اختصار لكلمة Type، وبيمثل النوع اللي هيتحدد وقت الاستدعاء الفعلي.</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما فائدة الـ Generics في Dart وماذا يعني التقييد بـ &lt;T extends num&gt;؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> توفر أماناً صارماً للأنواع مع قابلية إعادة استخدام نفس الكود لمختلف الداتا تايبس بدون الحاجة لـ dynamic. والتقييد بـ extends يضمن أن النوع البديل T يجب أن يكون رقماً (int أو double) فقط لاستخدام العمليات الرياضية عليه بأمان.</div>
+        </div>
       `,
       "example": {
         "code": `// كلاس استجابة موحد لأي API في التطبيق
@@ -1349,6 +1529,15 @@ Process finished with exit code 0`
       "content": `
         <h2>Enhanced Enums في Dart 3</h2>
         <p>زمان كانت الـ Enums في اللغات مجرد قائمة أسماء ثابتة (زي أيام الأسبوع). في Dart 3، الـ Enum أصبح <strong>Class حقيقي</strong> تقدر تديله خصائص وميثودز ومشيدات <code>const</code> ودوال مساعدة!</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هي الـ Enhanced Enums التي أضيفت في Dart وكيف تختلف عن التعدادات البسيطة؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> أصبحت مثل الكلاسات الكاملة؛ يمكن للتعداد أن يحتوي على حقول (Fields)، ومُشيدات (Constructors)، ودوال مخصصة (Methods)، وتحقيق واجهات، مما يسهل ربط كل حالة بلون وأيقونة ونص توضيحي.</div>
+        </div>
       `,
       "example": {
         "code": `enum MembershipTier {
@@ -1415,6 +1604,15 @@ Process finished with exit code 0`
         <p>تخيل لو بتعمل طلب للإنترنت بياخد ثانيتين، وتطبيقك وقف متجمد ومبيستجبش للمس الشاشة لحد ما الرد يرجع! دي أسوأ تجربة ممكنة.</p>
         <p>دارت لغة أحادية المسار (Single-Threaded) بس غير حاجزة (Non-Blocking) بفضل الـ <strong>Event Loop</strong>. الـ <code>Future<T></code> هو وعد بأن فيه قيمة هتتوفر في المستقبل.</p>
         <p>باستخدام كلمتي <code>async</code> و <code>await</code>، بنكتب الكود وكأنه متزامن خطوة بخطوة بطريقة سلسة وسهلة القراءة جداً.</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين استخدام async/await واستخدام .then() في التعامل مع الـ Futures؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> تعتبر async/await أسلوباً تصريحياً يجعل الكود غير المتزامن يُقرأ ويُعالج برمجياً كأنه كود متزامن سطر بسطر، وتسمح باستخدام try/catch العادية لصيد الأخطاء وتمنع كابوس تداخل الوعود (Callback Hell).</div>
+        </div>
       `,
       "example": {
         "code": `// محاكاة دالة تجلب بيانات المستخدم من سيرفر خارجي
@@ -1471,6 +1669,15 @@ Process finished with exit code 0`
         <p>لو الـ <code>Future</code> بيجيبلك قيمة واحدة بس في المستقبل، فالـ <strong>Stream</strong> هو ماسورة بيانات حية بينزل منها قيم متعددة ومتتالية على مدار الوقت!</p>
         <p>أمثلة حقيقية في التطبيقات: رسائل الشات الحية في واتساب، إحداثيات الـ GPS لمندوب التوصيل في أوبر، أو نمط الـ BLoC لإدارة حالة الشاشات في فلاتر.</p>
         <p>بتستخدم <code>async*</code> مع <code>yield</code> لضخ القيم في التدفق واحدة ورا التانية.</p>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما الفرق بين Single-subscription Stream و Broadcast Stream في Dart؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> الـ Single-subscription يقبل مستمعاً واحداً فقط طوال حياته (زي قراءة ملف من القرص)، ولو حاول مستمع آخر الاشتراك سيرمي خطأ. أما الـ Broadcast فيقبل عدة مستمعين في نفس الوقت (زي نقرات الماوس ومواقع الـ GPS وتدفق الإشعارات).</div>
+        </div>
       `,
       "example": {
         "code": `import 'dart:async';
@@ -1527,6 +1734,15 @@ Process finished with exit code 0`
           <li>Functional Lists (reduce, fold, map)</li>
           <li>Clean Business Logic & Separation of Concerns</li>
         </ul>
+
+        <div class="interview-box">
+          <div class="interview-box-header">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>سؤال إنترفيو مهم في هذا الموضوع 🎯</span>
+          </div>
+          <div class="interview-q">ما هي الفلسفة الأساسية لمعمارية Clean Architecture في مشاريع Dart و Flutter؟</div>
+          <div class="interview-a">💡 <strong>الإجابة النموذجية في المقابلة:</strong> فصل التطبيق إلى 3 طبقات مستقلة: Domain (قواعد العمل الخالصة والكيانات)، و Data (مصادر البيانات والـ API والـ Models)، و Presentation (الـ UI والـ State Management). بحيث لا تعتمد طبقة البزنس على أي إطار عمل خارجي ويسهل اختبارها وتطويرها.</div>
+        </div>
       `,
       "example": {
         "code": `enum PaymentMethod { cashOnDelivery, creditCard, digitalWallet }
